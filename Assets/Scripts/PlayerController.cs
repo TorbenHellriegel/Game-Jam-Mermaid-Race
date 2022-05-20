@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRb;
     public float speed;
+    public float diveSpeed;
     public float floatSpeed;
     public float camSensitivity;
 
@@ -18,13 +19,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Move the player around
         float VerticalInput = Input.GetAxis("Vertical");
         float horizontalInput = Input.GetAxis("Horizontal");
         float upDownInput = Input.GetAxis("UpDown");
         playerRb.AddForce(transform.forward * VerticalInput * speed);
         playerRb.AddForce(transform.right * horizontalInput * speed);
-        playerRb.AddForce(transform.up * upDownInput * speed * 1.5f);
+        playerRb.AddForce(transform.up * upDownInput * diveSpeed * 1.5f);
 
+        // Rotate player
         float mouseX = Input.GetAxis("Mouse X");
         Vector3 movementVector = new Vector3(0,mouseX,0);
         transform.Rotate(movementVector * camSensitivity);
@@ -32,6 +35,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        // Bounce the player up if hes in the water
         if(other.CompareTag("Water"))
         {
             float updrift = - transform.position.y + 0.5f;

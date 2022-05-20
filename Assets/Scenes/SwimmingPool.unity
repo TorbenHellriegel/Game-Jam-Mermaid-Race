@@ -919,7 +919,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  floatSpeed: 50
+  diveSpeed: 5
+  floatSpeed: 100
   camSensitivity: 3
 --- !u!54 &551154443
 Rigidbody:
@@ -935,7 +936,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &551154444
 BoxCollider:
@@ -948,8 +949,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.7, y: 1.6, z: 0.4}
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!1001 &758260640
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2578,7 +2579,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1000, y: 1000, z: 1000}
-  m_Center: {x: 0, y: -499, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1912853129
 Transform:
   m_ObjectHideFlags: 0
