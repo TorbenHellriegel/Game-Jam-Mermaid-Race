@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerRb;
     public float speed;
     public float floatSpeed;
+    public float camSensitivity;
 
     // Start is called before the first frame update
     void Start()
@@ -20,9 +21,13 @@ public class PlayerController : MonoBehaviour
         float VerticalInput = Input.GetAxis("Vertical");
         float horizontalInput = Input.GetAxis("Horizontal");
         float upDownInput = Input.GetAxis("UpDown");
-        playerRb.AddForce(Vector3.forward * VerticalInput * speed);
-        playerRb.AddForce(Vector3.right * horizontalInput * speed);
-        playerRb.AddForce(Vector3.up * upDownInput * speed * 1.5f);
+        playerRb.AddForce(transform.forward * VerticalInput * speed);
+        playerRb.AddForce(transform.right * horizontalInput * speed);
+        playerRb.AddForce(transform.up * upDownInput * speed * 1.5f);
+
+        float mouseX = Input.GetAxis("Mouse X");
+        Vector3 movementVector = new Vector3(0,mouseX,0);
+        transform.Rotate(movementVector * camSensitivity);
     }
 
     private void OnTriggerStay(Collider other)
@@ -30,7 +35,11 @@ public class PlayerController : MonoBehaviour
         if(other.CompareTag("Water"))
         {
             float updrift = - transform.position.y + 0.5f;
-            playerRb.AddForce(Vector3.up * floatSpeed * updrift, ForceMode.Force);
+            if(transform.position.y > 0)
+            {
+                updrift /= 5;
+            }
+            playerRb.AddForce(transform.up * floatSpeed * updrift, ForceMode.Force);
         }
     }
 }
