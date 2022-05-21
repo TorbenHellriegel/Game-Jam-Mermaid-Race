@@ -5,19 +5,17 @@ using UnityEngine;
 public class ControlSpawnedObstacles : MonoBehaviour
 {
     public GameObject[] obstacles;
+    public GameObject[] collectables;
 
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < obstacles.Length/3; i++)
+        int num = Random.Range(1, 3);
+        for (int j = 0; j < num; j++)
         {
-            int num = Random.Range(1, 3);
-            for (int j = 0; j < num; j++)
-            {
-                int index = Random.Range(0, 3);
-                obstacles[index + 3*i].SetActive(false);
-                Debug.Log("Inactive" + i + index);
-            }
+            int index = Random.Range(0, 3);
+            obstacles[index].SetActive(false);
+            collectables[index].SetActive(true);
         }
     }
 
