@@ -79,17 +79,24 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if(other.CompareTag("Wall"))
+        {
+            GainLives(-1);
+        }
         if(other.CompareTag("Obstacle"))
         {
             GainLives(-1);
+            Destroy(other.gameObject);
         }
         if(other.CompareTag("Coin"))
         {
             GainScore(10);
+            Destroy(other.gameObject);
         }
         if(other.CompareTag("Life"))
         {
             GainLives(1);
+            Destroy(other.gameObject);
         }
     }
 
