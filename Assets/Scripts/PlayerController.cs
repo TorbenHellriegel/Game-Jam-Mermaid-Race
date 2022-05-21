@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRb;
+    public TextMeshProUGUI livesText;
+    public TextMeshProUGUI scoreText;
+    public int lives;
+    public int score;
     public float speed;
     public float diveSpeed;
     private float diveTimer;
@@ -18,6 +23,12 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
+
+        lives = 3;
+        livesText.text = "Lives: " + lives;
+        score = 0;
+        scoreText.text = "Score: " + score;
+
         diveTimer = 0;
         switchPosition = 1;
     }
@@ -64,9 +75,33 @@ public class PlayerController : MonoBehaviour
             }
             playerRb.AddForce(transform.up * floatSpeed * updrift);
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
         if(other.CompareTag("Obstacle"))
         {
-            Debug.Log("Obstacle");
+            GainLives(-1);
         }
+        if(other.CompareTag("Coin"))
+        {
+            GainScore(10);
+        }
+        if(other.CompareTag("Life"))
+        {
+            GainLives(1);
+        }
+    }
+
+    private void GainLives(int amount)
+    {
+        lives += amount;
+        livesText.text = "Lives: " + lives;
+    }
+
+    private void GainScore(int amount)
+    {
+        score += amount;
+        scoreText.text = "Score: " + score;
     }
 }

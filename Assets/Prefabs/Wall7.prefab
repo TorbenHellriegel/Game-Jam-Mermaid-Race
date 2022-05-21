@@ -10,9 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1616496802988665821}
   - component: {fileID: 5768651283576291890}
+  - component: {fileID: 310775538769354532}
+  - component: {fileID: 399616183511004680}
+  - component: {fileID: 77538285289031998}
   m_Layer: 0
   m_Name: Wall7
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56,6 +59,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dce9d779007b704488bdd96e7d726ce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &310775538769354532
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616496802988665794}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 20, y: 10, z: 3}
+  m_Center: {x: -18, y: 0, z: -10}
+--- !u!65 &399616183511004680
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616496802988665794}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 20, y: 10, z: 3}
+  m_Center: {x: 18, y: 0, z: -10}
+--- !u!65 &77538285289031998
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616496802988665794}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 10, z: 3}
+  m_Center: {x: 0, y: 0, z: -10}
 --- !u!1001 &1828441614732609688
 PrefabInstance:
   m_ObjectHideFlags: 0

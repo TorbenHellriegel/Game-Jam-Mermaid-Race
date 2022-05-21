@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5216009499384088230}
   - component: {fileID: 1009461081338359625}
+  - component: {fileID: 8245352304359625676}
   m_Layer: 0
   m_Name: Wall4
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,6 +54,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dce9d779007b704488bdd96e7d726ce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &8245352304359625676
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5216009499384088249}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 20, y: 10, z: 3}
+  m_Center: {x: 0, y: -4, z: 5}
 --- !u!1001 &1998597028758957193
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -610,6 +624,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 421152, guid: 9447ff023d0aaf84f85f4d030320cd33, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6461544, guid: 9447ff023d0aaf84f85f4d030320cd33, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6461544, guid: 9447ff023d0aaf84f85f4d030320cd33, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
