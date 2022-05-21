@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     private float diveTimer;
     public float timeBetweenDives = 1;
     public int switchPosition;
-    private Vector3[] position = new Vector3[] {new Vector3(-10, 0, 0), new Vector3(0, 0, 0), new Vector3(10, 0, 0)};
+    private Vector3[] position = new Vector3[] {new Vector3(-5, 0, 0), new Vector3(0, 0, 0), new Vector3(5, 0, 0)};
     public float floatSpeed;
     public float camSensitivity;
 
@@ -39,12 +39,12 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.A) && switchPosition > 0)
         {
             switchPosition--;
-            playerRb.MovePosition(position[switchPosition]);
+            playerRb.MovePosition(new Vector3(position[switchPosition].x, transform.position.y, transform.position.z));
         }
         if(Input.GetKeyDown(KeyCode.D) && switchPosition < 2)
         {
             switchPosition++;
-            playerRb.MovePosition(position[switchPosition]);
+            playerRb.MovePosition(new Vector3(position[switchPosition].x, transform.position.y, transform.position.z));
         }
     }
 

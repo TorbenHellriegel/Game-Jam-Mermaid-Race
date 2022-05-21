@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    private float respawnSpeed = 60.0f/30.0f;
+
     public GameObject[] segmentPrefabs;
 
     // Start is called before the first frame update
@@ -16,7 +18,7 @@ public class GameManager : MonoBehaviour
             Instantiate(segmentPrefabs[index], new Vector3(0, 0, 160 + 60*i), segmentPrefabs[index].gameObject.transform.rotation);
         }
         // Spawn a new segment every second
-        InvokeRepeating("SpawnSegment", 0.95f, 0.95f);
+        InvokeRepeating("SpawnSegment", respawnSpeed, respawnSpeed);
     }
 
     // Update is called once per frame
