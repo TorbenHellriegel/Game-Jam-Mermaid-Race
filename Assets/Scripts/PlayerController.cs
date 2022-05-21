@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour
     public float floatSpeed;
     public float camSensitivity;
 
+    private PlayerSFX playerSFX;
+    private AudioSource playerAudioSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +34,9 @@ public class PlayerController : MonoBehaviour
 
         diveTimer = 0;
         switchPosition = 1;
+
+        playerSFX = GetComponent<PlayerSFX>();
+        playerAudioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -90,6 +96,7 @@ public class PlayerController : MonoBehaviour
         }
         if(other.CompareTag("Coin"))
         {
+            playerAudioSource.PlayOneShot(playerSFX.coinCollected);
             GainScore(10);
             Destroy(other.gameObject);
         }
