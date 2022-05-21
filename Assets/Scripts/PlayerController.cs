@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
     public float timeBetweenDives = 1;
     public int switchPosition;
     private Vector3[] position = new Vector3[] {new Vector3(-10, 0, 0), new Vector3(0, 0, 0), new Vector3(10, 0, 0)};
-    public float timeBetweenSwitches = 1;
     public float floatSpeed;
     public float camSensitivity;
 
@@ -65,9 +64,9 @@ public class PlayerController : MonoBehaviour
             }
             playerRb.AddForce(transform.up * floatSpeed * updrift);
         }
-        if(other.CompareTag("Wall"))
+        if(other.CompareTag("Obstacle"))
         {
-            Debug.Log("ggggg");
+            Debug.Log("Obstacle");
         }
     }
 }

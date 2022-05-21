@@ -9,12 +9,14 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Spawn the first 5 segments
         for (int i = 0; i < 5; i++)
         {
             int index = Random.Range(0, segmentPrefabs.Length);
             Instantiate(segmentPrefabs[index], new Vector3(0, 0, 160 + 60*i), segmentPrefabs[index].gameObject.transform.rotation);
         }
-        InvokeRepeating("SpawnSegment", 1, 1);
+        // Spawn a new segment every second
+        InvokeRepeating("SpawnSegment", 0.95f, 0.95f);
     }
 
     // Update is called once per frame
@@ -23,6 +25,7 @@ public class GameManager : MonoBehaviour
         
     }
 
+    // Spawns a random segment
     void SpawnSegment()
     {
         int index = Random.Range(0, segmentPrefabs.Length);

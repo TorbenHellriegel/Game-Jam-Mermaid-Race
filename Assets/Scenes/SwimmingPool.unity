@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c6a6df342b52d24092cf6bbb590c535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveHeight: 1
+  waveHeight: 0.5
   waveFrequency: 0.5
   waveLength: 0.5
   waveOriginPosition: {x: 0, y: 0, z: 100}
@@ -347,10 +347,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  diveSpeed: 13
+  diveSpeed: 15
   timeBetweenDives: 1
   switchPosition: 0
-  timeBetweenSwitches: 1
   floatSpeed: 50
   camSensitivity: 3
 --- !u!54 &551154443
