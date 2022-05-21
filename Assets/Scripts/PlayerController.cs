@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
             {
                 updrift /= 5;
             }
-            playerRb.AddForce(transform.up * floatSpeed * updrift, ForceMode.Force);
+            playerRb.AddForce(transform.up * floatSpeed * updrift);
         }
     }
 }
