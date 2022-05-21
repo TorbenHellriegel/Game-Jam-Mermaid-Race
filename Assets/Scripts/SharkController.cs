@@ -9,6 +9,11 @@ public class SharkController : MonoBehaviour
     {
         switch (pc.lives)
         {
+            case 3:
+                {
+                    transform.position = new Vector3(0, 0, -7);
+                    break;
+                }
             case 2:
                 {
                     transform.position = new Vector3(0, 0, -5);
