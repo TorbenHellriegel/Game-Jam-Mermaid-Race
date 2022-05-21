@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     private float diveTimer;
     public float timeBetweenDives = 1;
     public int switchPosition;
-    private Vector3[] position = new Vector3[] {new Vector3(-3, 0, 0), new Vector3(0, 0, 0), new Vector3(3, 0, 0)};
+    private Vector3[] position = new Vector3[] {new Vector3(-10, 0, 0), new Vector3(0, 0, 0), new Vector3(10, 0, 0)};
     public float timeBetweenSwitches = 1;
     public float floatSpeed;
     public float camSensitivity;
@@ -64,6 +64,10 @@ public class PlayerController : MonoBehaviour
                 updrift = 1;
             }
             playerRb.AddForce(transform.up * floatSpeed * updrift);
+        }
+        if(other.CompareTag("Wall"))
+        {
+            Debug.Log("ggggg");
         }
     }
 }
