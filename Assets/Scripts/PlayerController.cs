@@ -47,12 +47,12 @@ public class PlayerController : MonoBehaviour
         }
 
         // Swich lanes left and right
-        if(Input.GetKeyDown(KeyCode.A) && switchPosition > 0)
+        if((Input.GetKeyDown(KeyCode.A) ||Input.GetKeyDown(KeyCode.LeftArrow)) && switchPosition > 0)
         {
             switchPosition--;
             playerRb.MovePosition(new Vector3(position[switchPosition].x, transform.position.y, transform.position.z));
         }
-        if(Input.GetKeyDown(KeyCode.D) && switchPosition < 2)
+        if((Input.GetKeyDown(KeyCode.D) ||Input.GetKeyDown(KeyCode.RightArrow)) && switchPosition < 2)
         {
             switchPosition++;
             playerRb.MovePosition(new Vector3(position[switchPosition].x, transform.position.y, transform.position.z));
