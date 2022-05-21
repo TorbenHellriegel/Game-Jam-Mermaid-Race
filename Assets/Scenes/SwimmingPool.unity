@@ -258,7 +258,7 @@ MonoBehaviour:
   - {fileID: 3327334274767960625, guid: 24c7cdadd829de549930c7d0e31f7f8c, type: 3}
   - {fileID: 2462039584947986069, guid: 015f527fbdc316248a17e2c4abb9c2cf, type: 3}
   - {fileID: 1616496802988665794, guid: 8eee56dabe80b1e4aa47c90ce34b91ec, type: 3}
-  - {fileID: 8900234987961577512, guid: 786d266fbd6247a4e90c3dfb7e03eeb9, type: 3}
+  - {fileID: 6828614280014157050, guid: 786d266fbd6247a4e90c3dfb7e03eeb9, type: 3}
 --- !u!4 &446529021
 Transform:
   m_ObjectHideFlags: 0
@@ -347,6 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9b8cac9f4331384db3ea311e434748f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lives: 0
   speed: 5
   diveSpeed: 15
   timeBetweenDives: 1

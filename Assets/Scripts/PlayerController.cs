@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRb;
+    public int lives;
     public float speed;
     public float diveSpeed;
     private float diveTimer;
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
+        lives = 3;
         diveTimer = 0;
         switchPosition = 1;
     }
@@ -64,9 +66,14 @@ public class PlayerController : MonoBehaviour
             }
             playerRb.AddForce(transform.up * floatSpeed * updrift);
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
         if(other.CompareTag("Obstacle"))
         {
-            Debug.Log("Obstacle");
+            lives --;
+            Debug.Log("Lives" + lives);
         }
     }
 }
