@@ -7,6 +7,11 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerRb;
     public float speed;
     public float diveSpeed;
+    private float diveTimer;
+    public float timeBetweenDives = 1;
+    public int switchPosition;
+    private Vector3[] position = new Vector3[] {new Vector3(-3, 0, 0), new Vector3(0, 0, 0), new Vector3(3, 0, 0)};
+    public float timeBetweenSwitches = 1;
     public float floatSpeed;
     public float camSensitivity;
 
@@ -14,23 +19,34 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
+        diveTimer = 0;
+        switchPosition = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Move the player around
-        float VerticalInput = Input.GetAxis("Vertical");
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float upDownInput = Input.GetAxis("UpDown");
-        playerRb.AddForce(transform.forward * VerticalInput * speed);
-        playerRb.AddForce(transform.right * horizontalInput * speed);
-        playerRb.AddForce(transform.up * upDownInput * diveSpeed * 1.5f);
+        // Count to determine when the next dive is allowed
+        diveTimer += Time.deltaTime;
 
-        // Rotate player
-        float mouseX = Input.GetAxis("Mouse X");
-        Vector3 movementVector = new Vector3(0,mouseX,0);
-        transform.Rotate(movementVector * camSensitivity);
+        // Dive when the player presses space
+        if(Input.GetKeyDown(KeyCode.Space) && diveTimer > timeBetweenDives)
+        {
+            playerRb.AddForce(Vector3.down * diveSpeed, ForceMode.Impulse);
+            diveTimer = 0;
+        }
+
+        // Swich lanes left and right
+        if(Input.GetKeyDown(KeyCode.A) && switchPosition > 0)
+        {
+            switchPosition--;
+            playerRb.MovePosition(position[switchPosition]);
+        }
+        if(Input.GetKeyDown(KeyCode.D) && switchPosition < 2)
+        {
+            switchPosition++;
+            playerRb.MovePosition(position[switchPosition]);
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -38,10 +54,14 @@ public class PlayerController : MonoBehaviour
         // Bounce the player up if hes in the water
         if(other.CompareTag("Water"))
         {
-            float updrift = - transform.position.y + 0.5f;
-            if(transform.position.y > 0)
+            float updrift;
+            if(transform.position.y > -0.5f)
             {
-                updrift /= 5;
+                updrift = -0.2f;
+            }
+            else
+            {
+                updrift = 1;
             }
             playerRb.AddForce(transform.up * floatSpeed * updrift);
         }
