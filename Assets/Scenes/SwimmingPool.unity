@@ -527,6 +527,7 @@ MonoBehaviour:
   rockCrash: {fileID: 0}
   pufferCrash: {fileID: 0}
   coinCollect: {fileID: 0}
+  waterSplash: {fileID: 0}
 --- !u!54 &551154443
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1544,6 +1545,7 @@ MonoBehaviour:
   rockCrash: {fileID: 198330214428362902, guid: a97415c6b57076f41a6621a7b51d63a3, type: 3}
   pufferCrash: {fileID: 19800004, guid: f95ff734540a0d749be6571b6cb5b37f, type: 3}
   coinCollect: {fileID: 19800006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
+  waterSplash: {fileID: 198039942544698878, guid: 77c69ec12208c4c4380d15e30b6f8f68, type: 3}
 --- !u!114 &1062360486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2411,6 +2413,7 @@ MonoBehaviour:
   rockCrash: {fileID: 198330214428362902, guid: a97415c6b57076f41a6621a7b51d63a3, type: 3}
   pufferCrash: {fileID: 19800004, guid: f95ff734540a0d749be6571b6cb5b37f, type: 3}
   coinCollect: {fileID: 19800006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
+  waterSplash: {fileID: 198039942544698878, guid: 77c69ec12208c4c4380d15e30b6f8f68, type: 3}
 --- !u!114 &1885050705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2752,5 +2755,9 @@ PrefabInstance:
       propertyPath: pufferCrash
       value: 
       objectReference: {fileID: 19800004, guid: f95ff734540a0d749be6571b6cb5b37f, type: 3}
+    - target: {fileID: 8913357111132345591, guid: 041c3f3e432875840b5c3d59f64af4e3, type: 3}
+      propertyPath: waterSplash
+      value: 
+      objectReference: {fileID: 198039942544698878, guid: 77c69ec12208c4c4380d15e30b6f8f68, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 041c3f3e432875840b5c3d59f64af4e3, type: 3}
