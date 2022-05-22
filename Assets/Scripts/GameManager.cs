@@ -7,10 +7,15 @@ public class GameManager : MonoBehaviour
     private float respawnSpeed = 60.0f/30.0f;
 
     public GameObject[] segmentPrefabs;
+    public GameObject[] characters;
 
     // Start is called before the first frame update
     void Start()
     {
+        // Spawn the selected character
+        int CharacterIndex = PlayerPrefs.GetInt("Character");
+        characters[CharacterIndex].SetActive(true);
+
         // Spawn the first 5 segments
         for (int i = 0; i < 5; i++)
         {
