@@ -145,9 +145,4 @@ public class PlayerController : MonoBehaviour
         Destroy(gameObject);
         gameManager.GameOver();
     }
-
-    public void SharkCameraAttack()
-    {
-        // Make shark attack camera
-    }
 }

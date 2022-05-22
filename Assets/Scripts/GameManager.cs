@@ -10,9 +10,12 @@ public class GameManager : MonoBehaviour
     public GameObject[] segmentPrefabs;
     public GameObject[] characters;
 
+    public bool isGameOver = false;
+
     // Start is called before the first frame update
     void Start()
     {
+        isGameOver = false;
         // Spawn the selected character
         int CharacterIndex = PlayerPrefs.GetInt("Character");
         characters[CharacterIndex].SetActive(true);
@@ -42,6 +45,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        isGameOver = true;
         CancelInvoke(nameof(SpawnSegment));
         StartCoroutine(RestartGame());
     }
