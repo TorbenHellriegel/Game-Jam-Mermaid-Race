@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,9 +10,12 @@ public class GameManager : MonoBehaviour
     public GameObject[] segmentPrefabs;
     public GameObject[] characters;
 
+    public bool isGameOver = false;
+
     // Start is called before the first frame update
     void Start()
     {
+        isGameOver = false;
         // Spawn the selected character
         int CharacterIndex = PlayerPrefs.GetInt("Character");
         characters[CharacterIndex].SetActive(true);
@@ -37,5 +41,18 @@ public class GameManager : MonoBehaviour
     {
         int index = Random.Range(0, segmentPrefabs.Length);
         Instantiate(segmentPrefabs[index], new Vector3(0, 0, 400), segmentPrefabs[index].gameObject.transform.rotation);
+    }
+
+    public void GameOver()
+    {
+        isGameOver = true;
+        CancelInvoke(nameof(SpawnSegment));
+        StartCoroutine(RestartGame());
+    }
+
+    IEnumerator RestartGame()
+    {
+        yield return new WaitForSeconds(5.0f);
+        SceneManager.LoadScene("MainMenu");
     }
 }

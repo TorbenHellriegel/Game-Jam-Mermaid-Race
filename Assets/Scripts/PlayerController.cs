@@ -21,6 +21,12 @@ public class PlayerController : MonoBehaviour
 
     private PlayerSFX playerSFX;
     private AudioSource playerAudioSource;
+    private GameManager gameManager;
+
+    [Header("Particle Systems")]
+    public ParticleSystem rockCrash;
+    public ParticleSystem pufferCrash;
+    public ParticleSystem coinCollect;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +43,7 @@ public class PlayerController : MonoBehaviour
 
         playerSFX = GetComponent<PlayerSFX>();
         playerAudioSource = GetComponent<AudioSource>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -63,6 +70,11 @@ public class PlayerController : MonoBehaviour
             switchPosition++;
             playerRb.MovePosition(new Vector3(position[switchPosition].x, transform.position.y, transform.position.z));
         }
+
+        if(lives < 1)
+        {
+            GameOver();
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -87,16 +99,24 @@ public class PlayerController : MonoBehaviour
     {
         if(other.CompareTag("Wall"))
         {
-            GainLives(-1);
+            playerAudioSource.PlayOneShot(playerSFX.rockCrash);
+            Instantiate(rockCrash, transform.position,
+            rockCrash.transform.rotation);
+            GainLives(-1);        
         }
         if(other.CompareTag("Obstacle"))
         {
+            playerAudioSource.PlayOneShot(playerSFX.pufferCrash);
+            Instantiate(pufferCrash, transform.position,
+            pufferCrash.transform.rotation);
             GainLives(-1);
             Destroy(other.gameObject);
         }
         if(other.CompareTag("Coin"))
         {
             playerAudioSource.PlayOneShot(playerSFX.coinCollected);
+            Instantiate(coinCollect, transform.position,
+            coinCollect.transform.rotation);
             GainScore(10);
             Destroy(other.gameObject);
         }
@@ -117,5 +137,12 @@ public class PlayerController : MonoBehaviour
     {
         score += amount;
         scoreText.text = "Score: " + score;
+    }
+
+    private void GameOver()
+    {
+        // Do game over stuff
+        Destroy(gameObject);
+        gameManager.GameOver();
     }
 }

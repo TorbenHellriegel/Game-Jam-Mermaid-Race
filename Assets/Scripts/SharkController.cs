@@ -5,7 +5,24 @@ using UnityEngine;
 public class SharkController : MonoBehaviour
 {
     public PlayerController pc;
+    private GameManager gameManager;
+
+    private void Start()
+    {
+        pc = FindObjectOfType<PlayerController>();
+        gameManager = FindObjectOfType<GameManager>();
+    }
     void Update()
+    {
+        CheckTranform();
+
+        if (gameManager.isGameOver)
+        {
+            EndOfGameMovement();
+        }
+    }
+
+    void CheckTranform()
     {
         switch (pc.lives)
         {
@@ -32,5 +49,18 @@ public class SharkController : MonoBehaviour
                     break;
                 }
         }
+    }
+
+    void EndOfGameMovement()
+    {
+        // Make shark move towards camera
+        
+        // Rotate Shark
+
+        // Make shark "jump"
+
+        // Move shark towards camera
+
+        // Trigger Shark Laugh
     }
 }

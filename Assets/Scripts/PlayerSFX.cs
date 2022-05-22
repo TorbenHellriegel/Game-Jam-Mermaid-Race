@@ -7,6 +7,8 @@ public class PlayerSFX : MonoBehaviour
     public AudioSource playerAudioSource;
     public AudioClip[] jumpAudio;
     public AudioClip coinCollected;
+    public AudioClip rockCrash;
+    public AudioClip pufferCrash;
 
     private int randomSFX;
 
