@@ -1,2 +1,2 @@
-# Game-Jam-Mermaid-Race
+# Game-Jam-Mermaid-Surfer
  
