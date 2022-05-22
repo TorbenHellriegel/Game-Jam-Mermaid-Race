@@ -17,9 +17,9 @@ public class AudioController : MonoBehaviour
 
     private void Awake()
     {
-        mvSlider.onValueChanged.AddListener(HandleSliderValueChange);
-        musicSlider.onValueChanged.AddListener(HandleSliderValueChange);
-        sfxSlider.onValueChanged.AddListener(HandleSliderValueChange);
+        mvSlider.onValueChanged.AddListener(HandleSliderValueChangeMaster);
+        musicSlider.onValueChanged.AddListener(HandleSliderValueChangeMusic);
+        sfxSlider.onValueChanged.AddListener(HandleSliderValueChangeSfx);
     }
 
     private void Start()
@@ -33,10 +33,37 @@ public class AudioController : MonoBehaviour
     {
         PlayerPrefs.SetFloat(masterParameter, mvSlider.value);
     }
-    private void HandleSliderValueChange(float value)
+    private void HandleSliderValueChangeMaster(float value)
     {
-        audioMixer.SetFloat(masterParameter, Mathf.Log10(value) * multiplier);
-        audioMixer.SetFloat(musicParameter, Mathf.Log10(value) * multiplier);
-        audioMixer.SetFloat(sfxParameter, Mathf.Log10(value) * multiplier);
+        if(value == 0)
+        {
+            audioMixer.SetFloat(masterParameter, -80);
+        }
+        else
+        {
+            audioMixer.SetFloat(masterParameter, Mathf.Log10(value) * multiplier);
+        }
+    }
+    private void HandleSliderValueChangeMusic(float value)
+    {
+        if(value == 0)
+        {
+            audioMixer.SetFloat(musicParameter, -80);
+        }
+        else
+        {
+            audioMixer.SetFloat(musicParameter, Mathf.Log10(value) * multiplier);
+        }
+    }
+    private void HandleSliderValueChangeSfx(float value)
+    {
+        if(value == 0)
+        {
+            audioMixer.SetFloat(sfxParameter, -80);
+        }
+        else
+        {
+            audioMixer.SetFloat(sfxParameter, Mathf.Log10(value) * multiplier);
+        }
     }
 }
