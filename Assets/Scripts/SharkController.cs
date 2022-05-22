@@ -6,9 +6,9 @@ public class SharkController : MonoBehaviour
 {
     public PlayerController pc;
     public GameObject cam;
+    private bool gameOver = false;
     private bool facingCamera = false;
     private float timeElapsed;
-    private float lerpDuration = 1;
 
     private void Start()
     {
@@ -20,10 +20,15 @@ public class SharkController : MonoBehaviour
     {
         CheckTranform();
 
+        if (gameOver)
+        {
+            transform.Rotate(new Vector3(0, 150, 0) * Time.deltaTime);
+        }
+
         if (facingCamera)
         {
             timeElapsed += Time.deltaTime;
-            transform.Translate(new Vector3(0, 1.5f, 20) * timeElapsed);
+            transform.Translate(new Vector3(0, 2, 20) * timeElapsed);
         }
     }
 
@@ -56,10 +61,24 @@ public class SharkController : MonoBehaviour
         }
     }
 
+    void Jump()
+    {
+        transform.Rotate(new Vector3(-25, 0, 0));
+        facingCamera = true;
+    }
+
+    void StopRotation()
+    {
+        gameOver = false;
+        Invoke("Jump", 0.5f);
+    }
+
     public void EndOfGameMovement()
     {
-        transform.Rotate(new Vector3(-25, 180, 0));
-        facingCamera = true;
+        //transform.Rotate(new Vector3(-25, 180, 0));
+        gameOver = true;
+        Invoke("StopRotation", 1.2f);
+        //facingCamera = true;
 
         // Trigger Shark Laugh
     }

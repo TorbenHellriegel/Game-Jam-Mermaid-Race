@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
         CancelInvoke(nameof(SpawnSegment));
         shark.EndOfGameMovement();
-        Invoke("GameOverScreen", 0.8f);
+        Invoke("GameOverScreen", 2.1f);
     }
 
     void GameOverScreen()
