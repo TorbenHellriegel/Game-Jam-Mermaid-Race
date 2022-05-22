@@ -5,20 +5,30 @@ using UnityEngine;
 public class SharkController : MonoBehaviour
 {
     public PlayerController pc;
-    private GameManager gameManager;
+    public GameObject cam;
+    private bool gameOver = false;
+    private bool facingCamera = false;
+    private float timeElapsed;
 
     private void Start()
     {
         pc = FindObjectOfType<PlayerController>();
-        gameManager = FindObjectOfType<GameManager>();
+        facingCamera = false;
+        timeElapsed = 0;
     }
     void Update()
     {
         CheckTranform();
 
-        if (gameManager.isGameOver)
+        if (gameOver)
         {
-            EndOfGameMovement();
+            transform.Rotate(new Vector3(0, 150, 0) * Time.deltaTime);
+        }
+
+        if (facingCamera)
+        {
+            timeElapsed += Time.deltaTime;
+            transform.Translate(new Vector3(0, 2, 20) * timeElapsed);
         }
     }
 
@@ -51,15 +61,24 @@ public class SharkController : MonoBehaviour
         }
     }
 
-    void EndOfGameMovement()
+    void Jump()
     {
-        // Make shark move towards camera
-        
-        // Rotate Shark
+        transform.Rotate(new Vector3(-25, 0, 0));
+        facingCamera = true;
+    }
 
-        // Make shark "jump"
+    void StopRotation()
+    {
+        gameOver = false;
+        Invoke("Jump", 0.5f);
+    }
 
-        // Move shark towards camera
+    public void EndOfGameMovement()
+    {
+        //transform.Rotate(new Vector3(-25, 180, 0));
+        gameOver = true;
+        Invoke("StopRotation", 1.2f);
+        //facingCamera = true;
 
         // Trigger Shark Laugh
     }
