@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,9 +10,14 @@ public class GameManager : MonoBehaviour
 
     public GameObject[] segmentPrefabs;
     public GameObject[] characters;
+    public PlayerController player;
     public SharkController shark;
-
+    public GameObject gameOverScreen;
+    public GameObject finalScoreTextgo;
+    public TextMeshProUGUI finalScoreText;
+    public int finalScore = 0;
     public bool isGameOver = false;
+    public bool isGameOverScreen = false;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +28,7 @@ public class GameManager : MonoBehaviour
         // Spawn the selected character
         int CharacterIndex = PlayerPrefs.GetInt("Character");
         characters[CharacterIndex].SetActive(true);
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
         // Spawn the first 5 segments
         for (int i = 0; i < 5; i++)
@@ -36,7 +43,15 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!isGameOver)
+        {
+            finalScore = player.score;
+        }
         
+        if(Input.anyKey && isGameOverScreen)
+        {
+            RestartGame();
+        }
     }
 
     // Spawns a random segment
@@ -51,12 +66,19 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
         CancelInvoke(nameof(SpawnSegment));
         shark.EndOfGameMovement();
-        StartCoroutine(RestartGame());
+        Invoke("GameOverScreen", 0.8f);
     }
 
-    IEnumerator RestartGame()
+    void GameOverScreen()
     {
-        yield return new WaitForSeconds(5.0f);
+        isGameOverScreen = true;
+        gameOverScreen.SetActive(true);
+        finalScoreText = finalScoreTextgo.GetComponent<TextMeshProUGUI>();
+        finalScoreText.text = "Final Score: " + finalScore;
+    }
+
+    void RestartGame()
+    {
         SceneManager.LoadScene("MainMenu");
     }
 }
