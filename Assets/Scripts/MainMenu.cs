@@ -11,7 +11,14 @@ public class MainMenu : MonoBehaviour
 
     public void ExitButton()
     {
-        Application.Quit();
+        #if UNITY_EDITOR
+                    UnityEditor.EditorApplication.isPlaying = false;
+        #elif UNITY_WEBPLAYER
+                             Application.OpenURL(webplayerQuitURL);
+        #else
+                             Application.Quit();
+        #endif
+        
         Debug.Log("Game Closed");
     }
 
