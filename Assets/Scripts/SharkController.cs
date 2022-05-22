@@ -5,6 +5,11 @@ using UnityEngine;
 public class SharkController : MonoBehaviour
 {
     public PlayerController pc;
+
+    private void Start()
+    {
+        pc = FindObjectOfType<PlayerController>();
+    }
     void Update()
     {
         switch (pc.lives)

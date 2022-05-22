@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -946,6 +946,9 @@ MonoBehaviour:
   switchPosition: 0
   floatSpeed: 50
   camSensitivity: 3
+  rockCrash: {fileID: 198330214428362902, guid: a97415c6b57076f41a6621a7b51d63a3, type: 3}
+  pufferCrash: {fileID: 19800004, guid: f95ff734540a0d749be6571b6cb5b37f, type: 3}
+  coinCollect: {fileID: 19800006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
 --- !u!114 &1062360486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -963,6 +966,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a236b5b59fe016043ae526def84ed0c1, type: 3}
   - {fileID: 8300000, guid: d0673cd55f7dd104db85d74e57ac6681, type: 3}
   coinCollected: {fileID: 8300000, guid: 02ef7d4191c9f42fdbe70de7e8b1825b, type: 3}
+  rockCrash: {fileID: 8300000, guid: 06638530a97cb20498746c0db85b00db, type: 3}
+  pufferCrash: {fileID: 8300000, guid: f6336a9d0d1f87047b9f49a5be15cc64, type: 3}
 --- !u!65 &1062360487
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1670,6 +1675,9 @@ MonoBehaviour:
   switchPosition: 0
   floatSpeed: 50
   camSensitivity: 3
+  rockCrash: {fileID: 198330214428362902, guid: a97415c6b57076f41a6621a7b51d63a3, type: 3}
+  pufferCrash: {fileID: 19800004, guid: f95ff734540a0d749be6571b6cb5b37f, type: 3}
+  coinCollect: {fileID: 19800006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
 --- !u!114 &1885050705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1687,6 +1695,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a236b5b59fe016043ae526def84ed0c1, type: 3}
   - {fileID: 8300000, guid: d0673cd55f7dd104db85d74e57ac6681, type: 3}
   coinCollected: {fileID: 8300000, guid: 02ef7d4191c9f42fdbe70de7e8b1825b, type: 3}
+  rockCrash: {fileID: 8300000, guid: 06638530a97cb20498746c0db85b00db, type: 3}
+  pufferCrash: {fileID: 8300000, guid: f6336a9d0d1f87047b9f49a5be15cc64, type: 3}
 --- !u!65 &1885050706
 BoxCollider:
   m_ObjectHideFlags: 0
