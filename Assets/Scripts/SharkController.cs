@@ -9,12 +9,15 @@ public class SharkController : MonoBehaviour
     private bool gameOver = false;
     private bool facingCamera = false;
     private float timeElapsed;
+    public AudioSource sharkAudioSource;
+    public AudioClip sharkAttack;
 
     private void Start()
     {
         pc = FindObjectOfType<PlayerController>();
         facingCamera = false;
         timeElapsed = 0;
+        sharkAudioSource = GetComponent<AudioSource>();
     }
     void Update()
     {
@@ -77,6 +80,7 @@ public class SharkController : MonoBehaviour
     {
         //transform.Rotate(new Vector3(-25, 180, 0));
         gameOver = true;
+        sharkAudioSource.PlayOneShot(sharkAttack);
         Invoke("StopRotation", 1.2f);
         //facingCamera = true;
 
