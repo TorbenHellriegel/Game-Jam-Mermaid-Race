@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem rockCrash;
     public ParticleSystem pufferCrash;
     public ParticleSystem coinCollect;
+    public ParticleSystem waterSplash;
 
     // Start is called before the first frame update
     void Start()
@@ -59,6 +60,8 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space) && diveTimer > timeBetweenDives)
         {
             playerRb.AddForce(Vector3.down * diveSpeed, ForceMode.Impulse);
+            Instantiate(waterSplash, transform.position,
+            waterSplash.transform.rotation);
             diveTimer = 0;
         }
 
