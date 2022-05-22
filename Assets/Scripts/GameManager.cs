@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -37,5 +38,17 @@ public class GameManager : MonoBehaviour
     {
         int index = Random.Range(0, segmentPrefabs.Length);
         Instantiate(segmentPrefabs[index], new Vector3(0, 0, 400), segmentPrefabs[index].gameObject.transform.rotation);
+    }
+
+    public void GameOver()
+    {
+        CancelInvoke(nameof(SpawnSegment));
+        StartCoroutine(RestartGame());
+    }
+
+    IEnumerator RestartGame()
+    {
+        yield return new WaitForSeconds(5.0f);
+        SceneManager.LoadScene("MainMenu");
     }
 }
