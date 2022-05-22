@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     public float floatSpeed;
     public float camSensitivity;
 
+    private bool gameOverTriggered;
+
     private PlayerSFX playerSFX;
     private AudioSource playerAudioSource;
     private GameManager gameManager;
@@ -37,6 +39,7 @@ public class PlayerController : MonoBehaviour
         livesText.text = "Lives: " + lives;
         score = 0;
         scoreText.text = "Score: " + score;
+        gameOverTriggered = false;
 
         diveTimer = 0;
         switchPosition = 1;
@@ -71,8 +74,9 @@ public class PlayerController : MonoBehaviour
             playerRb.MovePosition(new Vector3(position[switchPosition].x, transform.position.y, transform.position.z));
         }
 
-        if(lives < 1)
+        if(lives < 1 && gameOverTriggered == false)
         {
+            gameOverTriggered = true;
             GameOver();
         }
     }

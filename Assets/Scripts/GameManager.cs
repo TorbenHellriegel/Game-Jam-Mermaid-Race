@@ -9,12 +9,15 @@ public class GameManager : MonoBehaviour
 
     public GameObject[] segmentPrefabs;
     public GameObject[] characters;
+    public SharkController shark;
 
     public bool isGameOver = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        shark = GameManager.FindObjectOfType<SharkController>();
+
         isGameOver = false;
         // Spawn the selected character
         int CharacterIndex = PlayerPrefs.GetInt("Character");
@@ -47,6 +50,7 @@ public class GameManager : MonoBehaviour
     {
         isGameOver = true;
         CancelInvoke(nameof(SpawnSegment));
+        shark.EndOfGameMovement();
         StartCoroutine(RestartGame());
     }
 

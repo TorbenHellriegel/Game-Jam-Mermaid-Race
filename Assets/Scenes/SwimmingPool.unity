@@ -263,6 +263,7 @@ MonoBehaviour:
   - {fileID: 463966863}
   - {fileID: 1885050702}
   - {fileID: 1062360483}
+  shark: {fileID: 0}
   isGameOver: 0
 --- !u!4 &446529021
 Transform:
@@ -662,6 +663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pc: {fileID: 463966864}
+  cam: {fileID: 1827982007}
 --- !u!1 &736160464
 GameObject:
   m_ObjectHideFlags: 0
@@ -2047,7 +2049,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8913357111132345576, guid: 041c3f3e432875840b5c3d59f64af4e3, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8913357111132345588, guid: 041c3f3e432875840b5c3d59f64af4e3, type: 3}
       propertyPath: m_RootOrder
