@@ -127,22 +127,22 @@ public class PlayerController : MonoBehaviour
             GainScore(10);
             Destroy(other.gameObject);
         }
-        if(other.CompareTag("Life"))
+        if(other.CompareTag("Section"))
         {
             GainLives(1);
-            Destroy(other.gameObject);
+            Time.timeScale += 0.1f;
         }
     }
 
     private void GainLives(int amount)
     {
-        lives += amount;
+        lives = Mathf.Min(lives + amount, 3);
         livesText.text = "Lives: " + lives;
     }
 
     private void GainScore(int amount)
     {
-        score += amount;
+        score += Mathf.RoundToInt(amount * Time.timeScale);
         scoreText.text = "Score: " + score;
     }
 
