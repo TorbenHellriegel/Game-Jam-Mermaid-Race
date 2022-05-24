@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
         diveTimer += Time.deltaTime;
 
         // Dive when the player presses space
-        if(Input.GetKeyDown(KeyCode.Space) && diveTimer > timeBetweenDives)
+        if(Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
         }
