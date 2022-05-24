@@ -135,6 +135,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 696870889061448782}
+  - component: {fileID: 9081630427356927176}
   m_Layer: 0
   m_Name: SetObstacle6
   m_TagString: Untagged
@@ -159,6 +160,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9081630427356927176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5145182444798746216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7c13a33ee68644b9b5e22cb6058e22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacles:
+  - {fileID: 5510538783250271986}
+  - {fileID: 2586589527758801657}
+  - {fileID: 2705245439190100895}
 --- !u!1 &5510538783250271986
 GameObject:
   m_ObjectHideFlags: 0

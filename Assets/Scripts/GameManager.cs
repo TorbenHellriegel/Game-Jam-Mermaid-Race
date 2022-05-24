@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
     private float respawnSpeed = 60.0f/30.0f;
     private int difficulty;
-    private int maxDifficulty = 4;
+    private int maxDifficulty = 8;
 
     public int spawnedSegments;
     public ControlSpawnedObstacles lastSegment;
