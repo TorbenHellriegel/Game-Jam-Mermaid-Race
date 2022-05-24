@@ -73,22 +73,17 @@ public class PlayerController : MonoBehaviour
         {
             Jump();
         }
-        jumpButton.GetComponent<Button>().onClick.AddListener(Jump);
         
-        // May need to add bools here for hasClicked -> check if UI has been clicked
-        // May also need to add bool for diving? hasDived/isDiving and set that as a new check
         // Swich lanes left and right
         if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)))
         {
             MoveLeft();
         }
-        leftButton.GetComponent<Button>().onClick.AddListener(MoveLeft);
 
         if ((Input.GetKeyDown(KeyCode.D) ||Input.GetKeyDown(KeyCode.RightArrow)))
         {
             MoveRight();   
         }
-        rightButton.GetComponent<Button>().onClick.AddListener(MoveRight);
 
         // Check for gameOver
         if (lives < 1 && gameOverTriggered == false)
@@ -98,7 +93,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void MoveLeft()
+    public void MoveLeft()
     {
         if (switchPosition > 0)
         {
@@ -107,7 +102,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void MoveRight()
+    public void MoveRight()
     {
         if (switchPosition < 2)
         {
@@ -116,7 +111,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Jump()
+    public void Jump()
     {
         if (diveTimer > timeBetweenDives)
         {
