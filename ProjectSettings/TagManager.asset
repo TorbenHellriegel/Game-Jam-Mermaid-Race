@@ -9,6 +9,10 @@ TagManager:
   - Obstacle
   - Coin
   - Life
+  - FxTemporaire
+  - JumpButton
+  - LeftButton
+  - RightButton
   layers:
   - Default
   - TransparentFX
