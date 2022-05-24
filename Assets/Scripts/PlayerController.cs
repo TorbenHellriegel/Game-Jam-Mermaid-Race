@@ -130,13 +130,12 @@ public class PlayerController : MonoBehaviour
         if(other.CompareTag("Section"))
         {
             GainLives(1);
-            Time.timeScale += 0.1f;
         }
     }
 
     private void GainLives(int amount)
     {
-        lives = Mathf.Min(lives + amount, 3);
+        // lives = Mathf.Min(lives + amount, 3);
         livesText.text = "Lives: " + lives;
     }
 

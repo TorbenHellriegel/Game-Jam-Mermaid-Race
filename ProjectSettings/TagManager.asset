@@ -9,6 +9,8 @@ TagManager:
   - Obstacle
   - Coin
   - Life
+  - FxTemporaire
+  - Section
   layers:
   - Default
   - TransparentFX

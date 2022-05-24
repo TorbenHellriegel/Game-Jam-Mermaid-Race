@@ -7,8 +7,11 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     private float respawnSpeed = 60.0f/30.0f;
+    private int difficulty;
+    private int maxDifficulty = 5;
 
     public int spawnedSegments;
+    public ControlSpawnedObstacles lastSegment;
     public GameObject nextSectionSegment;
     public GameObject[] segmentPrefabs;
     public GameObject[] characters;
@@ -29,6 +32,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         isGameOver = false;
         spawnedSegments = 0;
+        difficulty = 1;
 
         // Spawn the selected character
         int CharacterIndex = PlayerPrefs.GetInt("Character");
@@ -39,7 +43,8 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             int index = Random.Range(0, segmentPrefabs.Length);
-            Instantiate(segmentPrefabs[index], new Vector3(0, 0, 160 + 60*i), segmentPrefabs[index].gameObject.transform.rotation);
+            lastSegment = Instantiate(segmentPrefabs[index], new Vector3(0, 0, 160 + 60*i), segmentPrefabs[index].gameObject.transform.rotation).GetComponent<ControlSpawnedObstacles>();
+            lastSegment.SpawnObstacles(difficulty);
             spawnedSegments++;
         }
         // Spawn a new segment every second
@@ -60,17 +65,31 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void IncreaseDifficulty()
+    {
+        if(difficulty < maxDifficulty)
+        {
+            difficulty++;
+        }
+        else
+        {
+            Time.timeScale += 0.1f;
+        }
+    }
+
     // Spawns a random segment
     void SpawnSegment()
     {
         if (spawnedSegments % 10 == 0)
         {
             Instantiate(nextSectionSegment, new Vector3(0, 0, 400), nextSectionSegment.gameObject.transform.rotation);
+            IncreaseDifficulty();
         }
         else
         {
             int index = Random.Range(0, segmentPrefabs.Length);
-            Instantiate(segmentPrefabs[index], new Vector3(0, 0, 400), segmentPrefabs[index].gameObject.transform.rotation);
+            lastSegment = Instantiate(segmentPrefabs[index], new Vector3(0, 0, 400), segmentPrefabs[index].gameObject.transform.rotation).GetComponent<ControlSpawnedObstacles>();
+            lastSegment.SpawnObstacles(difficulty);
         }
         spawnedSegments++;
     }
