@@ -104,7 +104,7 @@ MonoBehaviour:
   - {fileID: 8618254587299304473}
   - {fileID: 5965249564887810131}
   - {fileID: 7149069497808009571}
-  difficulty: 0
+  diff: 0
 --- !u!1001 &753611956300001824
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -360,17 +360,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5216009499384088230}
     m_Modifications:
-    - target: {fileID: 2042151637766207937, guid: 970eb9240955f0a49baaa82eb177173a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 17
-      objectReference: {fileID: 0}
     - target: {fileID: 5160289915662679980, guid: 970eb9240955f0a49baaa82eb177173a, type: 3}
       propertyPath: m_Name
       value: SetObstacle5
       objectReference: {fileID: 0}
-    - target: {fileID: 6568791007161929338, guid: 970eb9240955f0a49baaa82eb177173a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 17
+    - target: {fileID: 5160289915662679980, guid: 970eb9240955f0a49baaa82eb177173a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8162704574481925672, guid: 970eb9240955f0a49baaa82eb177173a, type: 3}
       propertyPath: m_RootOrder
@@ -415,10 +411,6 @@ PrefabInstance:
     - target: {fileID: 8162704574481925672, guid: 970eb9240955f0a49baaa82eb177173a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8677565377088310839, guid: 970eb9240955f0a49baaa82eb177173a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 17
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 970eb9240955f0a49baaa82eb177173a, type: 3}
@@ -486,6 +478,10 @@ PrefabInstance:
     - target: {fileID: 6048248929771070186, guid: fdb6a9dfed49bd7459c83b1b7ce4c021, type: 3}
       propertyPath: m_Name
       value: SetObstacle2 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6048248929771070186, guid: fdb6a9dfed49bd7459c83b1b7ce4c021, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fdb6a9dfed49bd7459c83b1b7ce4c021, type: 3}
@@ -696,6 +692,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SetObstacle1
       objectReference: {fileID: 0}
+    - target: {fileID: 1112333255637691300, guid: fdef97857a9f58f44870634d457a17fa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6105914278552705060, guid: fdef97857a9f58f44870634d457a17fa, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -706,11 +706,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6105914278552705060, guid: fdef97857a9f58f44870634d457a17fa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6105914278552705060, guid: fdef97857a9f58f44870634d457a17fa, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 15
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6105914278552705060, guid: fdef97857a9f58f44870634d457a17fa, type: 3}
       propertyPath: m_LocalRotation.w

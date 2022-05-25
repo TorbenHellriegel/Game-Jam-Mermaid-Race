@@ -6,8 +6,6 @@ public class SetObstacleDifficultyRocks : MonoBehaviour
 {
     public GameObject[] obstacles;
 
-    private int difficulty;
-
     void OnEnable()
     {
         int index = Random.Range(0, obstacles.Length);

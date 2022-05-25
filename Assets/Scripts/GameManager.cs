@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System;
 
 public class GameManager : MonoBehaviour
 {
     private float respawnSpeed = 60.0f/30.0f;
     private int difficulty;
-    private int maxDifficulty = 8;
+    private int maxDifficulty = 6;
 
     public int spawnedSegments;
     public ControlSpawnedObstacles lastSegment;
@@ -23,12 +24,14 @@ public class GameManager : MonoBehaviour
     public int finalScore = 0;
     public bool isGameOver = false;
     public bool isGameOverScreen = false;
+    private System.Random rnd;
 
     // Start is called before the first frame update
     void Start()
     {
         shark = GameManager.FindObjectOfType<SharkController>();
 
+        rnd = new System.Random();
         Time.timeScale = 1;
         isGameOver = false;
         spawnedSegments = 0;
@@ -42,7 +45,7 @@ public class GameManager : MonoBehaviour
         // Spawn the first 5 segments
         for (int i = 0; i < 5; i++)
         {
-            int index = Random.Range(0, segmentPrefabs.Length);
+            int index = rnd.Next(0, segmentPrefabs.Length);
             lastSegment = Instantiate(segmentPrefabs[index], new Vector3(0, 0, 160 + 60*i), segmentPrefabs[index].gameObject.transform.rotation).GetComponent<ControlSpawnedObstacles>();
             lastSegment.SpawnObstacles(difficulty);
             spawnedSegments++;
@@ -73,7 +76,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Time.timeScale += 0.1f;
+            Time.timeScale += 0.02f;
         }
     }
 
@@ -87,7 +90,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            int index = Random.Range(0, segmentPrefabs.Length);
+            int index = rnd.Next(0, segmentPrefabs.Length);
             lastSegment = Instantiate(segmentPrefabs[index], new Vector3(0, 0, 400), segmentPrefabs[index].gameObject.transform.rotation).GetComponent<ControlSpawnedObstacles>();
             lastSegment.SpawnObstacles(difficulty);
         }

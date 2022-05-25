@@ -104,7 +104,7 @@ MonoBehaviour:
   - {fileID: 1250163840288999949}
   - {fileID: 5124042320508043355}
   - {fileID: 5316337852716081865}
-  difficulty: 0
+  diff: 0
 --- !u!1001 &2613222556536340201
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -159,6 +159,10 @@ PrefabInstance:
     - target: {fileID: 7158552174020116146, guid: 9953b43c3edcfea4aaa1310a9d1869d5, type: 3}
       propertyPath: m_Name
       value: SetObstacle3 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7158552174020116146, guid: 9953b43c3edcfea4aaa1310a9d1869d5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9953b43c3edcfea4aaa1310a9d1869d5, type: 3}
@@ -368,6 +372,10 @@ PrefabInstance:
     - target: {fileID: 1112333255637691300, guid: fdef97857a9f58f44870634d457a17fa, type: 3}
       propertyPath: m_Name
       value: SetObstacle1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1112333255637691300, guid: fdef97857a9f58f44870634d457a17fa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6105914278552705060, guid: fdef97857a9f58f44870634d457a17fa, type: 3}
       propertyPath: m_RootOrder
@@ -851,6 +859,10 @@ PrefabInstance:
     - target: {fileID: 7158552174020116146, guid: 9953b43c3edcfea4aaa1310a9d1869d5, type: 3}
       propertyPath: m_Name
       value: SetObstacle3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7158552174020116146, guid: 9953b43c3edcfea4aaa1310a9d1869d5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9953b43c3edcfea4aaa1310a9d1869d5, type: 3}

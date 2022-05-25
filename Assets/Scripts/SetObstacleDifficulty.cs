@@ -11,17 +11,32 @@ public class SetObstacleDifficulty : MonoBehaviour
 
     void OnEnable()
     {
-        difficulty = gameObject.GetComponentInParent<ControlSpawnedObstacles>().difficulty;
+        difficulty = gameObject.GetComponentInParent<ControlSpawnedObstacles>().diff;
 
-        // get safe positions (multiple)
-
-        // for each safe position...
-
-        for (int i = 2; i > difficulty % 2; i--)
+        if(difficulty % 2 == 1)
         {
-            int index = Random.Range(0, obstacles.Length);
-            obstacles[index].SetActive(true);
-            collectables[index].SetActive(false);
+            SetUnsafePosition(Random.Range(0, obstacles.Length));
         }
+        else
+        {
+            SetSafePosition(Random.Range(0, obstacles.Length));
+        }
+    }
+    
+    void SetSafePosition(int index)
+    {
+        obstacles[index].SetActive(false);
+        collectables[index].SetActive(true);
+    }
+    
+    void SetUnsafePosition(int index)
+    {
+        for (int i = 0; i < obstacles.Length; i++)
+        {
+            obstacles[i].SetActive(false);
+            collectables[i].SetActive(true);
+        }
+        obstacles[index].SetActive(true);
+        collectables[index].SetActive(false);
     }
 }

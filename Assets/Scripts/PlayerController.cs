@@ -8,11 +8,13 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerRb;
     public TextMeshProUGUI livesText;
     public TextMeshProUGUI scoreText;
+    private PlayerSFX playerSfx;
     public int lives;
+    public int maxLives;
     public int score;
     public float speed;
     public float diveSpeed;
-    private float diveTimer;
+    public float diveTimer;
     public float timeBetweenDives = 1;
     public int switchPosition;
     private Vector3[] position = new Vector3[] {new Vector3(-5, 0, 0), new Vector3(0, 0, 0), new Vector3(5, 0, 0)};
@@ -36,8 +38,9 @@ public class PlayerController : MonoBehaviour
     {
         playerRb = GetComponent<Rigidbody>();
 
-        lives = 3;
-        livesText.text = "Lives: " + lives;
+        maxLives = 3;
+        lives = maxLives;
+        livesText.text = "Lives: " + lives + "/" + maxLives;
         score = 0;
         scoreText.text = "Score: " + score;
         gameOverTriggered = false;
@@ -48,6 +51,7 @@ public class PlayerController : MonoBehaviour
         playerSFX = GetComponent<PlayerSFX>();
         playerAudioSource = GetComponent<AudioSource>();
         gameManager = FindObjectOfType<GameManager>();
+        playerSfx = gameObject.GetComponent<PlayerSFX>();
     }
 
     // Update is called once per frame
@@ -62,6 +66,7 @@ public class PlayerController : MonoBehaviour
             playerRb.AddForce(Vector3.down * diveSpeed, ForceMode.Impulse);
             Instantiate(waterSplash, transform.position,
             waterSplash.transform.rotation);
+            playerSfx.PlayJumpAudio();
             diveTimer = 0;
         }
 
@@ -109,14 +114,14 @@ public class PlayerController : MonoBehaviour
             playerAudioSource.PlayOneShot(playerSFX.rockCrash);
             Instantiate(rockCrash, transform.position,
             rockCrash.transform.rotation);
-            GainLives(-1);        
+            LooseLives(-1);
         }
         if(other.CompareTag("Obstacle"))
         {
             playerAudioSource.PlayOneShot(playerSFX.pufferCrash);
             Instantiate(pufferCrash, transform.position,
             pufferCrash.transform.rotation);
-            GainLives(-1);
+            LooseLives(-1);
             Destroy(other.gameObject);
         }
         if(other.CompareTag("Coin"))
@@ -135,8 +140,21 @@ public class PlayerController : MonoBehaviour
 
     private void GainLives(int amount)
     {
-        // lives = Mathf.Min(lives + amount, 3);
-        livesText.text = "Lives: " + lives;
+        if(lives == maxLives)
+        {
+            maxLives++;
+        }
+        else
+        {
+            lives++;
+        }
+        livesText.text = "Lives: " + lives + "/" + maxLives;
+    }
+
+    private void LooseLives(int amount)
+    {
+        lives = Mathf.Min(lives + amount, maxLives);
+        livesText.text = "Lives: " + lives + "/" + maxLives;
     }
 
     private void GainScore(int amount)
