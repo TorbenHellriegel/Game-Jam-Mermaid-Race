@@ -29,7 +29,10 @@ public class PlayerController : MonoBehaviour
     private float diveTimer;
     public float timeBetweenDives = 1;
     [Header("Control Varaibles")]
-    public int switchPosition;
+    public int currentPosition;
+    public int nextPosition;
+    private float swichDistance;
+    private float swichTimer;
     private Vector3[] position = new Vector3[] {new Vector3(-5, 0, 0), new Vector3(0, 0, 0), new Vector3(5, 0, 0)};
     public float floatSpeed;
     [Header("Camera Settings")]
@@ -58,7 +61,8 @@ public class PlayerController : MonoBehaviour
         gameOverTriggered = false;
 
         diveTimer = 0;
-        switchPosition = 1;
+        currentPosition = 1;
+        nextPosition = 1;
 
         playerSFX = GetComponent<PlayerSFX>();
         playerAudioSource = GetComponent<AudioSource>();
@@ -70,6 +74,9 @@ public class PlayerController : MonoBehaviour
     {
         // Count to determine when the next dive is allowed
         diveTimer += Time.deltaTime;
+
+        // Animate the character swiching lane
+        SwichLane();
 
         // Dive when the player presses space
         if(Input.GetKeyDown(KeyCode.Space))
@@ -96,21 +103,42 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Animate the character swiching lane
+    private void SwichLane()
+    {
+        if(currentPosition != nextPosition)
+        {
+            swichDistance += Time.deltaTime*20;
+            swichDistance = Mathf.Min(swichDistance, 1);
+            transform.position = Vector3.Lerp(new Vector3(position[currentPosition].x, transform.position.y, transform.position.z),
+                                            new Vector3(position[nextPosition].x, transform.position.y, transform.position.z),
+                                            swichDistance);
+            if(position[nextPosition].x == transform.position.x)
+            {
+                currentPosition = nextPosition;
+            }
+        }
+    }
+
     public void MoveLeft()
     {
-        if (switchPosition > 0)
+        if (currentPosition > 0 && currentPosition == nextPosition)
         {
-            switchPosition--;
-            playerRb.MovePosition(new Vector3(position[switchPosition].x, transform.position.y, transform.position.z));
+            swichDistance = 0;
+            nextPosition = currentPosition-1;
+            // switchPosition--;
+            // playerRb.MovePosition(new Vector3(position[switchPosition].x, transform.position.y, transform.position.z));
         }
     }
 
     public void MoveRight()
     {
-        if (switchPosition < 2)
+        if (currentPosition < 2 && currentPosition == nextPosition)
         {
-            switchPosition++;
-            playerRb.MovePosition(new Vector3(position[switchPosition].x, transform.position.y, transform.position.z));
+            swichDistance = 0;
+            nextPosition = currentPosition+1;
+            // switchPosition++;
+            // playerRb.MovePosition(new Vector3(position[switchPosition].x, transform.position.y, transform.position.z));
         }
     }
 
