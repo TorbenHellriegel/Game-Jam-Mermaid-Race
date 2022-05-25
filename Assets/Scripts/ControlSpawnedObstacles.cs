@@ -10,7 +10,6 @@ public class ControlSpawnedObstacles : MonoBehaviour
     public void SpawnObstacles(int difficulty)
     {
         diff = difficulty;
-        Debug.Log(Mathf.CeilToInt(diff/2.0f));
 
         for (int i = 0; i < Mathf.CeilToInt(diff/2.0f); i++)
         {

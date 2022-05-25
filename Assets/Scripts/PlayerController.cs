@@ -121,7 +121,7 @@ public class PlayerController : MonoBehaviour
             playerRb.AddForce(Vector3.down * diveSpeed, ForceMode.Impulse);
             Instantiate(waterSplash, transform.position,
             waterSplash.transform.rotation);
-            playerSfx.PlayJumpAudio();
+            playerSFX.PlayJumpAudio();
             diveTimer = 0;
         }
 
