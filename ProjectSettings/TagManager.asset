@@ -11,6 +11,9 @@ TagManager:
   - Life
   - FxTemporaire
   - Section
+  - JumpButton
+  - LeftButton
+  - RightButton
   layers:
   - Default
   - TransparentFX

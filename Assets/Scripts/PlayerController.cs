@@ -1,39 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRb;
-    public TextMeshProUGUI livesText;
-    public TextMeshProUGUI scoreText;
-    private PlayerSFX playerSfx;
-    public int lives;
-    public int maxLives;
-    public int score;
-    public float speed;
-    public float diveSpeed;
-    public float diveTimer;
-    public float timeBetweenDives = 1;
-    public int switchPosition;
-    private Vector3[] position = new Vector3[] {new Vector3(-5, 0, 0), new Vector3(0, 0, 0), new Vector3(5, 0, 0)};
-    public float floatSpeed;
-    public float camSensitivity;
-
     private bool gameOverTriggered;
 
     private PlayerSFX playerSFX;
     private AudioSource playerAudioSource;
     private GameManager gameManager;
 
+    [Header("GUI Components")]
+    public TextMeshProUGUI livesText;
+    public TextMeshProUGUI scoreText;
+    public Button jumpButton;
+    public Button leftButton;
+    public Button rightButton;
+    [Space]
+    public int lives;
+    public int maxLives;
+    public int score;
+    [Header("Dive Variables")]
+    public float speed;
+    public float diveSpeed;
+    private float diveTimer;
+    public float timeBetweenDives = 1;
+    [Header("Control Varaibles")]
+    public int switchPosition;
+    private Vector3[] position = new Vector3[] {new Vector3(-5, 0, 0), new Vector3(0, 0, 0), new Vector3(5, 0, 0)};
+    public float floatSpeed;
+    [Header("Camera Settings")]
+    public float camSensitivity;
     [Header("Particle Systems")]
     public ParticleSystem rockCrash;
     public ParticleSystem pufferCrash;
     public ParticleSystem coinCollect;
     public ParticleSystem waterSplash;
 
-    // Start is called before the first frame update
+    private void Awake()
+    {
+        // Was giving error in start so moved to awake
+        playerRb = GetComponent<Rigidbody>();
+    }
+
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
@@ -51,7 +63,6 @@ public class PlayerController : MonoBehaviour
         playerSFX = GetComponent<PlayerSFX>();
         playerAudioSource = GetComponent<AudioSource>();
         gameManager = FindObjectOfType<GameManager>();
-        playerSfx = gameObject.GetComponent<PlayerSFX>();
     }
 
     // Update is called once per frame
@@ -61,7 +72,51 @@ public class PlayerController : MonoBehaviour
         diveTimer += Time.deltaTime;
 
         // Dive when the player presses space
-        if(Input.GetKeyDown(KeyCode.Space) && diveTimer > timeBetweenDives)
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            Jump();
+        }
+        
+        // Swich lanes left and right
+        if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)))
+        {
+            MoveLeft();
+        }
+
+        if ((Input.GetKeyDown(KeyCode.D) ||Input.GetKeyDown(KeyCode.RightArrow)))
+        {
+            MoveRight();   
+        }
+
+        // Check for gameOver
+        if (lives < 1 && gameOverTriggered == false)
+        {
+            gameOverTriggered = true;
+            GameOver();
+        }
+    }
+
+    public void MoveLeft()
+    {
+        if (switchPosition > 0)
+        {
+            switchPosition--;
+            playerRb.MovePosition(new Vector3(position[switchPosition].x, transform.position.y, transform.position.z));
+        }
+    }
+
+    public void MoveRight()
+    {
+        if (switchPosition < 2)
+        {
+            switchPosition++;
+            playerRb.MovePosition(new Vector3(position[switchPosition].x, transform.position.y, transform.position.z));
+        }
+    }
+
+    public void Jump()
+    {
+        if (diveTimer > timeBetweenDives)
         {
             playerRb.AddForce(Vector3.down * diveSpeed, ForceMode.Impulse);
             Instantiate(waterSplash, transform.position,
@@ -70,23 +125,6 @@ public class PlayerController : MonoBehaviour
             diveTimer = 0;
         }
 
-        // Swich lanes left and right
-        if((Input.GetKeyDown(KeyCode.A) ||Input.GetKeyDown(KeyCode.LeftArrow)) && switchPosition > 0)
-        {
-            switchPosition--;
-            playerRb.MovePosition(new Vector3(position[switchPosition].x, transform.position.y, transform.position.z));
-        }
-        if((Input.GetKeyDown(KeyCode.D) ||Input.GetKeyDown(KeyCode.RightArrow)) && switchPosition < 2)
-        {
-            switchPosition++;
-            playerRb.MovePosition(new Vector3(position[switchPosition].x, transform.position.y, transform.position.z));
-        }
-
-        if(lives < 1 && gameOverTriggered == false)
-        {
-            gameOverTriggered = true;
-            GameOver();
-        }
     }
 
     private void OnTriggerStay(Collider other)
