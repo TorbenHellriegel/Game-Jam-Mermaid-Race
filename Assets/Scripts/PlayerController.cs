@@ -7,7 +7,6 @@ using TMPro;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRb;
-    
     private bool gameOverTriggered;
 
     private PlayerSFX playerSFX;
@@ -22,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public Button rightButton;
     [Space]
     public int lives;
+    public int maxLives;
     public int score;
     [Header("Dive Variables")]
     public float speed;
@@ -48,8 +48,11 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        lives = 3;
-        livesText.text = "Lives: " + lives;
+        playerRb = GetComponent<Rigidbody>();
+
+        maxLives = 3;
+        lives = maxLives;
+        livesText.text = "Lives: " + lives + "/" + maxLives;
         score = 0;
         scoreText.text = "Score: " + score;
         gameOverTriggered = false;
@@ -118,6 +121,7 @@ public class PlayerController : MonoBehaviour
             playerRb.AddForce(Vector3.down * diveSpeed, ForceMode.Impulse);
             Instantiate(waterSplash, transform.position,
             waterSplash.transform.rotation);
+            playerSFX.PlayJumpAudio();
             diveTimer = 0;
         }
 
@@ -148,14 +152,14 @@ public class PlayerController : MonoBehaviour
             playerAudioSource.PlayOneShot(playerSFX.rockCrash);
             Instantiate(rockCrash, transform.position,
             rockCrash.transform.rotation);
-            GainLives(-1);        
+            LooseLives(-1);
         }
         if(other.CompareTag("Obstacle"))
         {
             playerAudioSource.PlayOneShot(playerSFX.pufferCrash);
             Instantiate(pufferCrash, transform.position,
             pufferCrash.transform.rotation);
-            GainLives(-1);
+            LooseLives(-1);
             Destroy(other.gameObject);
         }
         if(other.CompareTag("Coin"))
@@ -166,22 +170,34 @@ public class PlayerController : MonoBehaviour
             GainScore(10);
             Destroy(other.gameObject);
         }
-        if(other.CompareTag("Life"))
+        if(other.CompareTag("Section"))
         {
             GainLives(1);
-            Destroy(other.gameObject);
         }
     }
 
     private void GainLives(int amount)
     {
-        lives += amount;
-        livesText.text = "Lives: " + lives;
+        if(lives == maxLives)
+        {
+            maxLives++;
+        }
+        else
+        {
+            lives++;
+        }
+        livesText.text = "Lives: " + lives + "/" + maxLives;
+    }
+
+    private void LooseLives(int amount)
+    {
+        lives = Mathf.Min(lives + amount, maxLives);
+        livesText.text = "Lives: " + lives + "/" + maxLives;
     }
 
     private void GainScore(int amount)
     {
-        score += amount;
+        score += Mathf.RoundToInt(amount * Time.timeScale);
         scoreText.text = "Score: " + score;
     }
 

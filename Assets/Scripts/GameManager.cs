@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System;
 
 public class GameManager : MonoBehaviour
 {
     private float respawnSpeed = 60.0f/30.0f;
+    private int difficulty;
+    private int maxDifficulty = 6;
 
+    public int spawnedSegments;
+    public ControlSpawnedObstacles lastSegment;
+    public GameObject nextSectionSegment;
     public GameObject[] segmentPrefabs;
     public GameObject[] characters;
     public PlayerController player;
@@ -18,13 +24,19 @@ public class GameManager : MonoBehaviour
     public int finalScore = 0;
     public bool isGameOver = false;
     public bool isGameOverScreen = false;
+    private System.Random rnd;
 
     // Start is called before the first frame update
     void Start()
     {
         shark = GameManager.FindObjectOfType<SharkController>();
 
+        rnd = new System.Random();
+        Time.timeScale = 1;
         isGameOver = false;
+        spawnedSegments = 0;
+        difficulty = 1;
+
         // Spawn the selected character
         int CharacterIndex = PlayerPrefs.GetInt("Character");
         characters[CharacterIndex].SetActive(true);
@@ -33,8 +45,10 @@ public class GameManager : MonoBehaviour
         // Spawn the first 5 segments
         for (int i = 0; i < 5; i++)
         {
-            int index = Random.Range(0, segmentPrefabs.Length);
-            Instantiate(segmentPrefabs[index], new Vector3(0, 0, 160 + 60*i), segmentPrefabs[index].gameObject.transform.rotation);
+            int index = rnd.Next(0, segmentPrefabs.Length);
+            lastSegment = Instantiate(segmentPrefabs[index], new Vector3(0, 0, 160 + 60*i), segmentPrefabs[index].gameObject.transform.rotation).GetComponent<ControlSpawnedObstacles>();
+            lastSegment.SpawnObstacles(difficulty);
+            spawnedSegments++;
         }
         // Spawn a new segment every second
         InvokeRepeating("SpawnSegment", respawnSpeed, respawnSpeed);
@@ -54,11 +68,33 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void IncreaseDifficulty()
+    {
+        if(difficulty < maxDifficulty)
+        {
+            difficulty++;
+        }
+        else
+        {
+            Time.timeScale += 0.02f;
+        }
+    }
+
     // Spawns a random segment
     void SpawnSegment()
     {
-        int index = Random.Range(0, segmentPrefabs.Length);
-        Instantiate(segmentPrefabs[index], new Vector3(0, 0, 400), segmentPrefabs[index].gameObject.transform.rotation);
+        if (spawnedSegments % 10 == 0)
+        {
+            Instantiate(nextSectionSegment, new Vector3(0, 0, 400), nextSectionSegment.gameObject.transform.rotation);
+            IncreaseDifficulty();
+        }
+        else
+        {
+            int index = rnd.Next(0, segmentPrefabs.Length);
+            lastSegment = Instantiate(segmentPrefabs[index], new Vector3(0, 0, 400), segmentPrefabs[index].gameObject.transform.rotation).GetComponent<ControlSpawnedObstacles>();
+            lastSegment.SpawnObstacles(difficulty);
+        }
+        spawnedSegments++;
     }
 
     public void GameOver()

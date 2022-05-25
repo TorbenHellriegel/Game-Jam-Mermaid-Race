@@ -10,6 +10,7 @@ TagManager:
   - Coin
   - Life
   - FxTemporaire
+  - Section
   - JumpButton
   - LeftButton
   - RightButton

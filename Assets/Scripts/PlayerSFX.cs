@@ -17,12 +17,9 @@ public class PlayerSFX : MonoBehaviour
         playerAudioSource = GetComponent<AudioSource>();
     }
 
-    void Update()
+    public void PlayJumpAudio()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            playerAudioSource.PlayOneShot(jumpAudio[randomSFX]);
-        }
+        playerAudioSource.PlayOneShot(jumpAudio[randomSFX]);
     }
 
     void RandomAudioEffect()
