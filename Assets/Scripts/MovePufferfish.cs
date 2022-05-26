@@ -6,10 +6,10 @@ public class MovePufferfish : MonoBehaviour
 {
     private float bound = 7;
     private float speed = 3;
-    private float direction;
+    public float direction;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         direction = (Random.Range(0, 2) - 0.5f) * 2;
     }
