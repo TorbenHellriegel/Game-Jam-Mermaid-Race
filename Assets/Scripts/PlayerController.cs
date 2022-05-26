@@ -231,7 +231,6 @@ public class PlayerController : MonoBehaviour
 
     private void GameOver()
     {
-        // Do game over stuff
         Destroy(gameObject, 0.1f);
         gameManager.GameOver();
     }
