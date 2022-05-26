@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44835937, g: 0.49839252, b: 0.5756129, a: 1}
+  m_IndirectSpecularColor: {r: 0.4483589, g: 0.49839205, b: 0.5756122, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -588,7 +588,7 @@ MonoBehaviour:
   - {fileID: 2210920251900971270, guid: a7c269a63bec55a43b5786b27554d07e, type: 3}
   - {fileID: 5216009499384088249, guid: 14024ba1c443fce4bb12c6c057d37b68, type: 3}
   - {fileID: 3327334274767960625, guid: 24c7cdadd829de549930c7d0e31f7f8c, type: 3}
-  - {fileID: 1616496802988665794, guid: 015f527fbdc316248a17e2c4abb9c2cf, type: 3}
+  - {fileID: 1616496802988665794, guid: 8eee56dabe80b1e4aa47c90ce34b91ec, type: 3}
   characters:
   - {fileID: 463966863}
   - {fileID: 1885050702}
@@ -1874,6 +1874,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4646245346328178160, guid: cb3ae1113c44ca74c9bc9770995ce68c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb3ae1113c44ca74c9bc9770995ce68c, type: 3}
 --- !u!1 &1062360483 stripped
@@ -3151,6 +3155,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7146521406498821007, guid: b59f019af1583824f925256e2c22d2cf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -516098083770646512, guid: b59f019af1583824f925256e2c22d2cf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b59f019af1583824f925256e2c22d2cf, type: 3}
       propertyPath: m_Name
       value: Character2
@@ -3162,6 +3174,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: b59f019af1583824f925256e2c22d2cf, type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5852260666609929350, guid: b59f019af1583824f925256e2c22d2cf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b59f019af1583824f925256e2c22d2cf, type: 3}

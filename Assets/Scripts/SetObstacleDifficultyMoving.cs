@@ -26,9 +26,6 @@ public class SetObstacleDifficultyMoving : MonoBehaviour
     int GetBlockedPos(int pos, float direction)
     {
         float position = pos + Mathf.Round(direction)*2;
-        Debug.Log("pos: " + pos);
-        Debug.Log("dir: " + direction);
-        Debug.Log("safepo: " + position);
         switch (position)
         {
             case -2.0f:

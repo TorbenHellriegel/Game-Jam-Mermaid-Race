@@ -126,8 +126,6 @@ public class PlayerController : MonoBehaviour
         {
             swichDistance = 0;
             nextPosition = currentPosition-1;
-            // switchPosition--;
-            // playerRb.MovePosition(new Vector3(position[switchPosition].x, transform.position.y, transform.position.z));
         }
     }
 
@@ -137,8 +135,6 @@ public class PlayerController : MonoBehaviour
         {
             swichDistance = 0;
             nextPosition = currentPosition+1;
-            // switchPosition++;
-            // playerRb.MovePosition(new Vector3(position[switchPosition].x, transform.position.y, transform.position.z));
         }
     }
 
