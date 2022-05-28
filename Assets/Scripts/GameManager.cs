@@ -11,25 +11,33 @@ public class GameManager : MonoBehaviour
     private int difficulty;
     private int maxDifficulty = 6;
 
+    [Header("Segment Management")]
     public int spawnedSegments;
     public ControlSpawnedObstacles lastSegment;
     public GameObject nextSectionSegment;
+    [Space]
     public GameObject[] segmentPrefabs;
+    [Header("Character Management")]
     public GameObject[] characters;
     public PlayerController player;
     public SharkController shark;
+    [Header("GUI Management")]
     public GameObject gameOverScreen;
     public GameObject finalScoreTextgo;
     public TextMeshProUGUI finalScoreText;
+    public TextMeshProUGUI distanceTraveledText;
     public int finalScore = 0;
+    [Header("Game Management")]
     public bool isGameOver = false;
     public bool isGameOverScreen = false;
     private System.Random rnd;
+    private DistanceTracker distanceTracker;
 
     // Start is called before the first frame update
     void Start()
     {
         shark = GameManager.FindObjectOfType<SharkController>();
+        distanceTracker = FindObjectOfType<DistanceTracker>();
 
         rnd = new System.Random();
         Time.timeScale = 1;
@@ -111,6 +119,7 @@ public class GameManager : MonoBehaviour
         gameOverScreen.SetActive(true);
         finalScoreText = finalScoreTextgo.GetComponent<TextMeshProUGUI>();
         finalScoreText.text = "Final Score: " + finalScore;
+        distanceTraveledText.text = string.Format("Distance: {0:#0.0} m", distanceTracker.distanceUnit);
     }
 
     void RestartGame()

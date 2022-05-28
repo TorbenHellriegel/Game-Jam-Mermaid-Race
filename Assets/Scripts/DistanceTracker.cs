@@ -6,7 +6,7 @@ using TMPro;
 public class DistanceTracker : MonoBehaviour
 {
     public TextMeshProUGUI distanceText;
-    private float distanceUnit = 0.0f;
+    public float distanceUnit = 0.0f;
     private GameManager gameManager;
 
     private void Awake()
@@ -16,20 +16,27 @@ public class DistanceTracker : MonoBehaviour
 
     void Start()
     {
-        InvokeRepeating("DistanceChecker", 0.0f, 0.25f);
+        InvokeRepeating(nameof(DistanceChecker), 0.0f, 0.05f);
     }
 
     private void Update()
     {
         if (gameManager.isGameOver)
         {
-            CancelInvoke("DistanceChecker");
+            CancelInvoke(nameof(DistanceChecker));
         }
     }
 
     private void DistanceChecker()
     {
-        distanceUnit += 1.5f;
-        distanceText.text = "Distance:" + distanceUnit.ToString();
+        distanceUnit += 0.3f;
+        if (distanceUnit == 0)
+        {
+            distanceText.text = string.Format("Distance: 0 m");
+        }
+        else
+        {
+            distanceText.text = string.Format("Distance: {0:#0.0} m", distanceUnit);
+        }
     }
 }
