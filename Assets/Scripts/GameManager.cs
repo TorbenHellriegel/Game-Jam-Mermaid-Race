@@ -15,8 +15,7 @@ public class GameManager : MonoBehaviour
     public int spawnedSegments;
     public ControlSpawnedObstacles lastSegment;
     public GameObject nextSectionSegment;
-    [Space]
-    public GameObject[] segmentPrefabs;
+    public GameObject[] segmentPrefab;
     [Header("Character Management")]
     public GameObject[] characters;
     public PlayerController player;
@@ -53,8 +52,8 @@ public class GameManager : MonoBehaviour
         // Spawn the first 5 segments
         for (int i = 0; i < 5; i++)
         {
-            int index = rnd.Next(0, segmentPrefabs.Length);
-            lastSegment = Instantiate(segmentPrefabs[index], new Vector3(0, 0, 160 + 60*i), segmentPrefabs[index].gameObject.transform.rotation).GetComponent<ControlSpawnedObstacles>();
+            int index = rnd.Next(0, segmentPrefab.Length);
+            lastSegment = Instantiate(segmentPrefab[index], new Vector3(0, 0, 160 + 60*i), segmentPrefab[index].gameObject.transform.rotation).GetComponent<ControlSpawnedObstacles>();
             lastSegment.SpawnObstacles(difficulty);
             spawnedSegments++;
         }
@@ -98,8 +97,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            int index = rnd.Next(0, segmentPrefabs.Length);
-            lastSegment = Instantiate(segmentPrefabs[index], new Vector3(0, 0, 400), segmentPrefabs[index].gameObject.transform.rotation).GetComponent<ControlSpawnedObstacles>();
+            int index = rnd.Next(0, segmentPrefab.Length);
+            lastSegment = Instantiate(segmentPrefab[index], new Vector3(0, 0, 400), segmentPrefab[index].gameObject.transform.rotation).GetComponent<ControlSpawnedObstacles>();
             lastSegment.SpawnObstacles(difficulty);
         }
         spawnedSegments++;
