@@ -1076,11 +1076,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 86ce88151dff44446a3caad122f697ce, type: 2}
   masterParameter: Master
-  mvSlider: {fileID: 0}
+  mvSlider: {fileID: 758056006}
   musicParameter: Music
-  musicSlider: {fileID: 0}
+  musicSlider: {fileID: 187931544}
   sfxParameter: SFX
-  sfxSlider: {fileID: 0}
+  sfxSlider: {fileID: 1903492396}
   multiplier: 30
 --- !u!4 &382562413
 Transform:
