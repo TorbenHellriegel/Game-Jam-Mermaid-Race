@@ -38,4 +38,10 @@ public class MainMenu : MonoBehaviour
         }
         SceneManager.LoadScene("SwimmingPool");
     }
+
+    public void ExitGame()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("MainMenu");
+    }
 }

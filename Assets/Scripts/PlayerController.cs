@@ -35,8 +35,6 @@ public class PlayerController : MonoBehaviour
     private float swichTimer;
     private Vector3[] position = new Vector3[] {new Vector3(-5, 0, 0), new Vector3(0, 0, 0), new Vector3(5, 0, 0)};
     public float floatSpeed;
-    [Header("Camera Settings")]
-    public float camSensitivity;
     [Header("Particle Systems")]
     public ParticleSystem rockCrash;
     public ParticleSystem pufferCrash;
@@ -81,7 +79,7 @@ public class PlayerController : MonoBehaviour
         // Dive when the player presses space
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            Jump();
+            Dive();
         }
         
         // Swich lanes left and right
@@ -138,7 +136,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Jump()
+    public void Dive()
     {
         if (diveTimer > timeBetweenDives)
         {
