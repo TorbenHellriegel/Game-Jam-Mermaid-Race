@@ -71,14 +71,14 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // Swich between horizintal and vertical play on mobile
-        // if (Input.deviceOrientation==DeviceOrientation.Portrait||Input.deviceOrientation==DeviceOrientation.PortraitUpsideDown) 
-        // {
-        //     cam.transform.position = camPosVertical;
-        // }
-        // else
-        // {
-        //     cam.transform.position = camPosHorizontal;
-        // }
+        if (Input.deviceOrientation==DeviceOrientation.Portrait||Input.deviceOrientation==DeviceOrientation.PortraitUpsideDown) 
+        {
+            cam.transform.position = camPosVertical;
+        }
+        else
+        {
+            cam.transform.position = camPosHorizontal;
+        }
 
         if(!isGameOver)
         {
