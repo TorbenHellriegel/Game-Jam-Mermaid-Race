@@ -15,21 +15,26 @@ public class GameManager : MonoBehaviour
     public int spawnedSegments;
     public ControlSpawnedObstacles lastSegment;
     public GameObject nextSectionSegment;
-    [Space]
-    public GameObject[] segmentPrefabs;
+    public GameObject[] segmentPrefab;
     [Header("Character Management")]
     public GameObject[] characters;
     public PlayerController player;
     public SharkController shark;
+    [Header("Camera Settings")]
+    public GameObject cam;
+    private Vector3 camPosHorizontal = new Vector3(0, 5, -10);
+    private Vector3 camPosVertical = new Vector3(0, 7, -15);
     [Header("GUI Management")]
     public GameObject gameOverScreen;
     public GameObject finalScoreTextgo;
     public TextMeshProUGUI finalScoreText;
     public TextMeshProUGUI distanceTraveledText;
+    public GameObject pauseMenu;
     public int finalScore = 0;
     [Header("Game Management")]
     public bool isGameOver = false;
     public bool isGameOverScreen = false;
+    public float lastTimeScale;
     private System.Random rnd;
     private DistanceTracker distanceTracker;
 
@@ -53,8 +58,8 @@ public class GameManager : MonoBehaviour
         // Spawn the first 5 segments
         for (int i = 0; i < 5; i++)
         {
-            int index = rnd.Next(0, segmentPrefabs.Length);
-            lastSegment = Instantiate(segmentPrefabs[index], new Vector3(0, 0, 160 + 60*i), segmentPrefabs[index].gameObject.transform.rotation).GetComponent<ControlSpawnedObstacles>();
+            int index = rnd.Next(0, segmentPrefab.Length);
+            lastSegment = Instantiate(segmentPrefab[index], new Vector3(0, 0, 160 + 60*i), segmentPrefab[index].gameObject.transform.rotation).GetComponent<ControlSpawnedObstacles>();
             lastSegment.SpawnObstacles(difficulty);
             spawnedSegments++;
         }
@@ -65,6 +70,16 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Swich between horizintal and vertical play on mobile
+        if (Input.deviceOrientation==DeviceOrientation.Portrait||Input.deviceOrientation==DeviceOrientation.PortraitUpsideDown) 
+        {
+            cam.transform.position = camPosVertical;
+        }
+        else
+        {
+            cam.transform.position = camPosHorizontal;
+        }
+
         if(!isGameOver)
         {
             finalScore = player.score;
@@ -98,8 +113,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            int index = rnd.Next(0, segmentPrefabs.Length);
-            lastSegment = Instantiate(segmentPrefabs[index], new Vector3(0, 0, 400), segmentPrefabs[index].gameObject.transform.rotation).GetComponent<ControlSpawnedObstacles>();
+            int index = rnd.Next(0, segmentPrefab.Length);
+            lastSegment = Instantiate(segmentPrefab[index], new Vector3(0, 0, 400), segmentPrefab[index].gameObject.transform.rotation).GetComponent<ControlSpawnedObstacles>();
             lastSegment.SpawnObstacles(difficulty);
         }
         spawnedSegments++;
@@ -125,5 +140,18 @@ public class GameManager : MonoBehaviour
     void RestartGame()
     {
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void PauseGame()
+    {
+        lastTimeScale = Time.timeScale;
+        Time.timeScale = 0;
+        pauseMenu.SetActive(true);
+    }
+
+    public void ContinueGame()
+    {
+        Time.timeScale = lastTimeScale;
+        pauseMenu.SetActive(false);
     }
 }

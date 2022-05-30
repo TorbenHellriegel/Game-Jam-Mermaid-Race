@@ -1,12 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SwipeManager : MonoBehaviour
 {
+    public PlayerController player;
+
     public static bool tap, swipeLeft, swipeRight, swipeUp, swipeDown;
     private bool isDraging = false;
     private Vector2 startTouch, swipeDelta;
+
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+    }
 
     private void Update()
     {
@@ -65,17 +73,29 @@ public class SwipeManager : MonoBehaviour
             {
                 //Left or Right
                 if (x < 0)
+                {
                     swipeLeft = true;
+                    player.MoveLeft();
+                }
                 else
+                {
                     swipeRight = true;
+                    player.MoveRight();
+                }
             }
             else
             {
                 //Up or Down
                 if (y < 0)
+                {
                     swipeDown = true;
+                    player.Dive();
+                }
                 else
+                {
                     swipeUp = true;
+                    player.Dive();
+                }
             }
 
             Reset();
