@@ -85,10 +85,6 @@ public class GameManager : MonoBehaviour
             finalScore = player.score;
         }
         
-        if(Input.anyKey && isGameOverScreen)
-        {
-            RestartGame();
-        }
     }
 
     public void IncreaseDifficulty()
@@ -137,7 +133,7 @@ public class GameManager : MonoBehaviour
         distanceTraveledText.text = string.Format("Distance: {0:#0.0} m", distanceTracker.distanceUnit);
     }
 
-    void RestartGame()
+    public void RestartGame()
     {
         SceneManager.LoadScene("MainMenu");
     }
