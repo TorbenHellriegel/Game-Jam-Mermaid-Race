@@ -149,21 +149,26 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void Swim()
+    {
+        float updrift;
+        if(transform.position.y > -0.5f)
+        {
+            updrift = -0.2f;
+        }
+        else
+        {
+            updrift = 1;
+        }
+        playerRb.AddForce(transform.up * floatSpeed * updrift);
+    }
+
     private void OnTriggerStay(Collider other)
     {
         // Bounce the player up if hes in the water
         if(other.CompareTag("Water"))
         {
-            float updrift;
-            if(transform.position.y > -0.5f)
-            {
-                updrift = -0.2f;
-            }
-            else
-            {
-                updrift = 1;
-            }
-            playerRb.AddForce(transform.up * floatSpeed * updrift);
+            Swim();
         }
     }
 
