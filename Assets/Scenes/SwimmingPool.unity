@@ -1180,8 +1180,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerScore: {fileID: 778092026}
   playerDistance: {fileID: 1733403596}
-  scoreLeaderboardID: 3314
-  distanceLeaderboardID: 3315
+  scoreLeaderboardID: 3328
+  distanceLeaderboardID: 3329
   returnedScores:
   - {fileID: 1807478993}
   - {fileID: 145715304}
