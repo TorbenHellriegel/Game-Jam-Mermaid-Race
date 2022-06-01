@@ -91,7 +91,7 @@ public class PlayerHealth : MonoBehaviour
         {
             gameManager.isGameOver = true;
             gameManager.GameOver();
-            Destroy(gameObject);
+            Destroy(gameObject, 0.1f);
         }
     }
 }
