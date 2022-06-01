@@ -8,12 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRb;
     private PlayerSFX playerSFX;
-
-
-    [Header("GUI Components")]
-    public Button jumpButton;
-    public Button leftButton;
-    public Button rightButton;
+    
     [Header("Dive Variables")]
     public float speed;
     public float diveSpeed;
@@ -23,8 +18,6 @@ public class PlayerController : MonoBehaviour
     public int currentPosition;
     public int nextPosition;
     private float swichDistance;
-    // Not being used?
-    private float swichTimer;
     private Vector3[] position = new Vector3[] {new Vector3(-5, 0, 0), new Vector3(0, 0, 0), new Vector3(5, 0, 0)};
     public float floatSpeed;
     [Header("Particle Systems")]
