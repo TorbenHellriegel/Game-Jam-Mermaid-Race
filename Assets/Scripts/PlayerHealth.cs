@@ -7,8 +7,8 @@ public class PlayerHealth : MonoBehaviour
 {
     [Header("Health Values")]
     public int health;
-    public int currentNumberOfHearts;
-    private int maxNumberOfHearts = 4;
+    public int maxHealth;
+    private int maxNumberOfHearts = 5;
     [Header("Heart Values")]
     public Image[] hearts;
     public Sprite fullHeart;
@@ -19,21 +19,11 @@ public class PlayerHealth : MonoBehaviour
     private void Awake()
     {
         gameManager = FindObjectOfType<GameManager>();
+        SetHealth();
     }
 
-    void Update()
+    private void SetHealth()
     {
-        InitializeHealth();
-        CheckForDeath();
-    }
-
-    private void InitializeHealth()
-    {
-        if (health > maxNumberOfHearts)
-        {
-            health = maxNumberOfHearts;
-        }
-
         for (int i = 0; i < hearts.Length; i++)
         {
             if (i < health)
@@ -45,7 +35,7 @@ public class PlayerHealth : MonoBehaviour
                 hearts[i].sprite = emtpyHeart;
             }
 
-            if (i < maxNumberOfHearts)
+            if (i < maxHealth)
             {
                 hearts[i].enabled = true;
             }
@@ -77,12 +67,22 @@ public class PlayerHealth : MonoBehaviour
 
     private void GainLives(int amount)
     {
-            health+=amount;
+        if(health == maxHealth && maxHealth < maxNumberOfHearts)
+        {
+            maxHealth++;
+        }
+        else
+        {
+            health += amount;
+        }
+        SetHealth();
     }
 
     private void LooseLives(int amount)
     {
-        health-=amount;
+        health -= amount;
+        SetHealth();
+        CheckForDeath();
     }
 
     private void CheckForDeath()
@@ -91,7 +91,7 @@ public class PlayerHealth : MonoBehaviour
         {
             gameManager.isGameOver = true;
             gameManager.GameOver();
-            Destroy(gameObject, 0.1f);
+            Destroy(gameObject);
         }
     }
 }
