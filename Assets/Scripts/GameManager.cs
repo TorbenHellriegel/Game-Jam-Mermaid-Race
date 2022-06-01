@@ -17,10 +17,6 @@ public class GameManager : MonoBehaviour
     public GameObject[] characters;
     public PlayerController player;
     public SharkController shark;
-    [Header("Camera Settings")]
-    public Camera cam;
-    private Vector3 camPosHorizontal = new Vector3(0, 5, -10);
-    private Vector3 camPosVertical = new Vector3(0, 7, -15);
     [Header("GUI Management")]
     public GameObject gameOverScreen;
     public GameObject finalScoreTextgo;
@@ -70,13 +66,37 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // Swich between horizintal and vertical play on mobile
-        if (Screen.orientation == ScreenOrientation.LandscapeLeft || Screen.orientation == ScreenOrientation.LandscapeRight) 
+        if (Screen.orientation == ScreenOrientation.LandscapeLeft) 
         {
-            cam.fieldOfView = 60;
+            Debug.Log("DETECTET Screen.orientation == ScreenOrientation.LandscapeLeft");
         }
-        else
+        else if (Screen.orientation == ScreenOrientation.LandscapeRight)
         {
-            cam.fieldOfView = 85;
+            Debug.Log("DETECTET Screen.orientation == ScreenOrientation.LandscapeRight");
+        }
+        else if (Screen.orientation == ScreenOrientation.Portrait)
+        {
+            Debug.Log("DETECTET Screen.orientation == ScreenOrientation.Portrait");
+        }
+        else if (Screen.orientation == ScreenOrientation.PortraitUpsideDown)
+        {
+            Debug.Log("DETECTET Screen.orientation == ScreenOrientation.PortraitUpsideDown");
+        }
+        else if (Input.deviceOrientation == DeviceOrientation.Portrait)
+        {
+            Debug.Log("DETECTET Input.deviceOrientation == DeviceOrientation.Portrait");
+        }
+        else if (Input.deviceOrientation == DeviceOrientation.PortraitUpsideDown)
+        {
+            Debug.Log("DETECTET Input.deviceOrientation == DeviceOrientation.PortraitUpsideDown");
+        }
+        else if (Input.deviceOrientation == DeviceOrientation.LandscapeLeft)
+        {
+            Debug.Log("DETECTET Input.deviceOrientation == DeviceOrientation.LandscapeLeft");
+        }
+        else if (Input.deviceOrientation == DeviceOrientation.LandscapeRight)
+        {
+            Debug.Log("DETECTET Input.deviceOrientation == DeviceOrientation.LandscapeRight");
         }
 
         if(!isGameOver)
