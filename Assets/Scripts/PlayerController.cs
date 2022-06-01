@@ -7,22 +7,13 @@ using TMPro;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRb;
-    private bool gameOverTriggered;
-
     private PlayerSFX playerSFX;
-    private AudioSource playerAudioSource;
-    private GameManager gameManager;
+
 
     [Header("GUI Components")]
-    public TextMeshProUGUI livesText;
-    public TextMeshProUGUI scoreText;
     public Button jumpButton;
     public Button leftButton;
     public Button rightButton;
-    [Space]
-    public int lives;
-    public int maxLives;
-    public int score;
     [Header("Dive Variables")]
     public float speed;
     public float diveSpeed;
@@ -32,6 +23,7 @@ public class PlayerController : MonoBehaviour
     public int currentPosition;
     public int nextPosition;
     private float swichDistance;
+    // Not being used?
     private float swichTimer;
     private Vector3[] position = new Vector3[] {new Vector3(-5, 0, 0), new Vector3(0, 0, 0), new Vector3(5, 0, 0)};
     public float floatSpeed;
@@ -51,20 +43,12 @@ public class PlayerController : MonoBehaviour
     {
         playerRb = GetComponent<Rigidbody>();
 
-        maxLives = 3;
-        lives = maxLives;
-        livesText.text = "Lives: " + lives + "/" + maxLives;
-        score = 0;
-        scoreText.text = "Score: " + score;
-        gameOverTriggered = false;
-
         diveTimer = 0;
         currentPosition = 1;
         nextPosition = 1;
 
+        // Figure out how to make jump get called in PlayerSFX so we can get rid of this section
         playerSFX = GetComponent<PlayerSFX>();
-        playerAudioSource = GetComponent<AudioSource>();
-        gameManager = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -93,12 +77,6 @@ public class PlayerController : MonoBehaviour
             MoveRight();   
         }
 
-        // Check for gameOver
-        if (lives < 1 && gameOverTriggered == false)
-        {
-            gameOverTriggered = true;
-            GameOver();
-        }
     }
 
     // Animate the character swiching lane
@@ -143,6 +121,7 @@ public class PlayerController : MonoBehaviour
             playerRb.AddForce(Vector3.down * diveSpeed, ForceMode.Impulse);
             Instantiate(waterSplash, transform.position,
             waterSplash.transform.rotation);
+            // Figure out a way to call this just from PlayerSFX script to clean this up.
             playerSFX.PlayJumpAudio();
             diveTimer = 0;
         }
@@ -160,7 +139,7 @@ public class PlayerController : MonoBehaviour
         {
             updrift = 1;
         }
-        playerRb.AddForce(transform.up * floatSpeed * updrift);
+        playerRb.AddForce(floatSpeed * updrift * transform.up);
     }
 
     private void OnTriggerStay(Collider other)
@@ -172,65 +151,27 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Possibly create a PlayerVFX script to deal with VFX in a separate area instead of PlayerController
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Wall"))
         {
-            playerAudioSource.PlayOneShot(playerSFX.rockCrash);
             Instantiate(rockCrash, transform.position,
             rockCrash.transform.rotation);
-            LooseLives(-1);
         }
+
         if(other.CompareTag("Obstacle"))
         {
-            playerAudioSource.PlayOneShot(playerSFX.pufferCrash);
             Instantiate(pufferCrash, transform.position,
             pufferCrash.transform.rotation);
-            LooseLives(-1);
-            Destroy(other.gameObject);
         }
-        if(other.CompareTag("Coin"))
+
+        // Think about PlayerVFX script possibly to change this section
+        if (other.CompareTag("Coin"))
         {
-            playerAudioSource.PlayOneShot(playerSFX.coinCollected);
             Instantiate(coinCollect, transform.position,
             coinCollect.transform.rotation);
-            GainScore(10);
-            Destroy(other.gameObject);
         }
-        if(other.CompareTag("Section"))
-        {
-            GainLives(1);
-        }
-    }
 
-    private void GainLives(int amount)
-    {
-        if(lives == maxLives)
-        {
-            maxLives++;
-        }
-        else
-        {
-            lives++;
-        }
-        livesText.text = "Lives: " + lives + "/" + maxLives;
-    }
-
-    private void LooseLives(int amount)
-    {
-        lives = Mathf.Min(lives + amount, maxLives);
-        livesText.text = "Lives: " + lives + "/" + maxLives;
-    }
-
-    private void GainScore(int amount)
-    {
-        score += Mathf.RoundToInt(amount * Time.timeScale);
-        scoreText.text = "Score: " + score;
-    }
-
-    private void GameOver()
-    {
-        Destroy(gameObject, 0.1f);
-        gameManager.GameOver();
     }
 }

@@ -30,13 +30,6 @@ public class DistanceTracker : MonoBehaviour
     private void DistanceChecker()
     {
         distanceUnit += 1;
-        if (distanceUnit == 0)
-        {
-            distanceText.text = string.Format("Distance: 0 m");
-        }
-        else
-        {
-            distanceText.text = string.Format("Distance: " + distanceUnit + " m");
-        }
+        distanceText.text = distanceUnit.ToString() + " m";
     }
 }

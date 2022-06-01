@@ -19,11 +19,29 @@ public class PlayerSFX : MonoBehaviour
 
     public void PlayJumpAudio()
     {
+        RandomAudioEffect();
         playerAudioSource.PlayOneShot(jumpAudio[randomSFX]);
     }
 
     void RandomAudioEffect()
     {
         randomSFX = Random.Range(0, jumpAudio.Length);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Wall"))
+        {
+            playerAudioSource.PlayOneShot(rockCrash);
+        }
+        if (other.CompareTag("Obstacle"))
+        {
+            playerAudioSource.PlayOneShot(pufferCrash);
+        }
+        if (other.CompareTag("Coin"))
+        {
+            playerAudioSource.PlayOneShot(coinCollected);
+            Destroy(other.gameObject);
+        }
     }
 }

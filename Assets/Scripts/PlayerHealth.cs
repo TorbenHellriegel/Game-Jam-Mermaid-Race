@@ -14,15 +14,20 @@ public class PlayerHealth : MonoBehaviour
     public Sprite fullHeart;
     public Sprite emtpyHeart;
 
-    private BoxCollider playerCollider;
+    private GameManager gameManager;
 
-    private void Start()
+    private void Awake()
     {
-        playerCollider = GetComponent<BoxCollider>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
-    // Update is called once per frame
     void Update()
+    {
+        InitializeHealth();
+        CheckForDeath();
+    }
+
+    private void InitializeHealth()
     {
         if (health > maxNumberOfHearts)
         {
@@ -31,7 +36,7 @@ public class PlayerHealth : MonoBehaviour
 
         for (int i = 0; i < hearts.Length; i++)
         {
-            if(i < health)
+            if (i < health)
             {
                 hearts[i].sprite = fullHeart;
             }
@@ -40,7 +45,7 @@ public class PlayerHealth : MonoBehaviour
                 hearts[i].sprite = emtpyHeart;
             }
 
-            if(i < maxNumberOfHearts)
+            if (i < maxNumberOfHearts)
             {
                 hearts[i].enabled = true;
             }
@@ -61,6 +66,7 @@ public class PlayerHealth : MonoBehaviour
         if (other.CompareTag("Obstacle"))
         {
             LooseLives(1);
+            Destroy(other.gameObject);
         }
 
         if (other.CompareTag("Section"))
@@ -68,6 +74,7 @@ public class PlayerHealth : MonoBehaviour
             GainLives(1);
         }
     }
+
     private void GainLives(int amount)
     {
             health+=amount;
@@ -76,5 +83,15 @@ public class PlayerHealth : MonoBehaviour
     private void LooseLives(int amount)
     {
         health-=amount;
+    }
+
+    private void CheckForDeath()
+    {
+        if (health <= 0)
+        {
+            gameManager.isGameOver = true;
+            gameManager.GameOver();
+            Destroy(gameObject, 0.1f);
+        }
     }
 }

@@ -7,15 +7,12 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
-    private float respawnSpeed = 60.0f/30.0f;
-    private int difficulty;
-    private int maxDifficulty = 6;
-
     [Header("Segment Management")]
     public int spawnedSegments;
     public ControlSpawnedObstacles lastSegment;
     public GameObject nextSectionSegment;
     public GameObject[] segmentPrefab;
+    private float respawnSpeed = 60.0f / 30.0f;
     [Header("Character Management")]
     public GameObject[] characters;
     public PlayerController player;
@@ -37,6 +34,8 @@ public class GameManager : MonoBehaviour
     public float lastTimeScale;
     private System.Random rnd;
     private DistanceTracker distanceTracker;
+    private int difficulty;
+    private int maxDifficulty = 6;
 
     // Start is called before the first frame update
     void Start()
@@ -82,7 +81,7 @@ public class GameManager : MonoBehaviour
 
         if(!isGameOver)
         {
-            finalScore = player.score;
+            finalScore = FindObjectOfType<ScoreTracker>().score;
         }
         
     }
@@ -118,10 +117,9 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        isGameOver = true;
         CancelInvoke(nameof(SpawnSegment));
         shark.EndOfGameMovement();
-        Invoke("GameOverScreen", 2.1f);
+        Invoke(nameof(GameOverScreen), 2.1f);
     }
 
     void GameOverScreen()

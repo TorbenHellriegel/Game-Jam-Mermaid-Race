@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SharkController : MonoBehaviour
 {
-    public PlayerController pc;
+    public PlayerHealth playerHealth;
     public GameObject cam;
     private bool gameOver = false;
     private bool facingCamera = false;
@@ -14,7 +14,7 @@ public class SharkController : MonoBehaviour
 
     private void Start()
     {
-        pc = FindObjectOfType<PlayerController>();
+        playerHealth = FindObjectOfType<PlayerHealth>();
         facingCamera = false;
         timeElapsed = 0;
         sharkAudioSource = GetComponent<AudioSource>();
@@ -37,8 +37,13 @@ public class SharkController : MonoBehaviour
 
     void CheckTranform()
     {
-        switch (pc.lives)
+        switch (playerHealth.health)
         {
+            case 4:
+                {
+                    transform.position = new Vector3(0, 0, -9);
+                    break;
+                }
             case 3:
                 {
                     transform.position = new Vector3(0, 0, -7);
