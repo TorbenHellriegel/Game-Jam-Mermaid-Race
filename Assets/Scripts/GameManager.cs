@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public PlayerController player;
     public SharkController shark;
     [Header("Camera Settings")]
-    public GameObject cam;
+    public Camera cam;
     private Vector3 camPosHorizontal = new Vector3(0, 5, -10);
     private Vector3 camPosVertical = new Vector3(0, 7, -15);
     [Header("GUI Management")]
@@ -70,13 +70,13 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // Swich between horizintal and vertical play on mobile
-        if (Input.deviceOrientation==DeviceOrientation.Portrait||Input.deviceOrientation==DeviceOrientation.PortraitUpsideDown) 
+        if (Screen.orientation == ScreenOrientation.LandscapeLeft || Screen.orientation == ScreenOrientation.LandscapeRight) 
         {
-            cam.transform.position = camPosVertical;
+            cam.fieldOfView = 60;
         }
         else
         {
-            cam.transform.position = camPosHorizontal;
+            cam.fieldOfView = 85;
         }
 
         if(!isGameOver)
