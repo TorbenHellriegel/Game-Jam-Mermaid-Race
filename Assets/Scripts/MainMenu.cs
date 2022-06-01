@@ -22,6 +22,18 @@ public class MainMenu : MonoBehaviour
         Debug.Log("Game Closed");
     }
 
+    public void swipeControlsEnabled(bool enabled)
+    {
+        if(enabled)
+        {
+            PlayerPrefs.SetString("ControlType", "Swipe");
+        }
+        else
+        {
+            PlayerPrefs.SetString("ControlType", "Tap");
+        }
+    }
+
     public void StartGame()
     {
         if(character1.activeSelf)
