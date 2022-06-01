@@ -1258,6 +1258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerScore: {fileID: 778092026}
   playerDistance: {fileID: 1733403596}
+  playerNameInputField: {fileID: 824474891}
   scoreLeaderboardID: 3328
   distanceLeaderboardID: 3329
   returnedScores:
@@ -3423,13 +3424,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9b8cac9f4331384db3ea311e434748f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  livesText: {fileID: 0}
   jumpButton: {fileID: 0}
   leftButton: {fileID: 0}
   rightButton: {fileID: 0}
-  lives: 0
-  maxLives: 0
-  score: 0
   speed: 5
   diveSpeed: 15
   timeBetweenDives: 1
@@ -4841,7 +4838,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 732936473fb430b48a98e91876a65135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pc: {fileID: 463966864}
+  playerHealth: {fileID: 0}
   cam: {fileID: 1827982007}
   sharkAudioSource: {fileID: 722272645}
   sharkAttack: {fileID: 8300000, guid: 92e9335ee119045448745fdebbdc5b12, type: 3}
@@ -5852,7 +5849,19 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 200733662}
+        m_TargetAssemblyTypeName: LeaderboardManager, Assembly-CSharp
+        m_MethodName: SaveName
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls: []
@@ -13349,6 +13358,18 @@ PrefabInstance:
       propertyPath: scoreText
       value: 
       objectReference: {fileID: 576756418}
+    - target: {fileID: 2014909214651111312, guid: 7781a7936bdd3d942b5ba64244d448b0, type: 3}
+      propertyPath: jumpButton
+      value: 
+      objectReference: {fileID: 366648903}
+    - target: {fileID: 2014909214651111312, guid: 7781a7936bdd3d942b5ba64244d448b0, type: 3}
+      propertyPath: leftButton
+      value: 
+      objectReference: {fileID: 1936059487}
+    - target: {fileID: 2014909214651111312, guid: 7781a7936bdd3d942b5ba64244d448b0, type: 3}
+      propertyPath: rightButton
+      value: 
+      objectReference: {fileID: 598541693}
     - target: {fileID: 2052757681089654886, guid: 7781a7936bdd3d942b5ba64244d448b0, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -13490,6 +13511,18 @@ PrefabInstance:
       propertyPath: scoreText
       value: 
       objectReference: {fileID: 576756418}
+    - target: {fileID: 2709736281602185680, guid: d5deaaaad555dfb439487135c22a7c91, type: 3}
+      propertyPath: jumpButton
+      value: 
+      objectReference: {fileID: 366648903}
+    - target: {fileID: 2709736281602185680, guid: d5deaaaad555dfb439487135c22a7c91, type: 3}
+      propertyPath: leftButton
+      value: 
+      objectReference: {fileID: 1936059487}
+    - target: {fileID: 2709736281602185680, guid: d5deaaaad555dfb439487135c22a7c91, type: 3}
+      propertyPath: rightButton
+      value: 
+      objectReference: {fileID: 598541693}
     - target: {fileID: 2980119732435281030, guid: d5deaaaad555dfb439487135c22a7c91, type: 3}
       propertyPath: m_Name
       value: Character3

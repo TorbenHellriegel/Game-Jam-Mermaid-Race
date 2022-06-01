@@ -9,7 +9,9 @@ public class LeaderboardManager : MonoBehaviour
     private DistanceTracker distanceTracker;
     private GameManager gameManager;
     public TextMeshProUGUI playerScore, playerDistance;
-    private int memberID;
+    public TMP_InputField playerNameInputField;
+    private string playerID;
+    private string randomName;
     public int scoreLeaderboardID = 3314;
     public int distanceLeaderboardID = 3315;
     private int maxScores = 10;
@@ -20,7 +22,8 @@ public class LeaderboardManager : MonoBehaviour
     {
         distanceTracker = FindObjectOfType<DistanceTracker>();
         gameManager = FindObjectOfType<GameManager>();
-        GenerateMemberID();
+        playerID = PlayerPrefs.GetString("PlayerID");
+        maxScores = returnedScores.Length;
         ConnectToLootLockerAsGuest();
         // ConnectToLootLockerAsUser();
     }
@@ -59,7 +62,7 @@ public class LeaderboardManager : MonoBehaviour
 
     public void SubmitScore()
     {
-        LootLockerSDKManager.SubmitScore(memberID.ToString(), gameManager.finalScore, scoreLeaderboardID, (response) =>
+        LootLockerSDKManager.SubmitScore(playerID, gameManager.finalScore, scoreLeaderboardID, (response) =>
         {
             if (!response.success)
             {
@@ -74,7 +77,7 @@ public class LeaderboardManager : MonoBehaviour
 
     public void SubmitDistance()
     {
-        LootLockerSDKManager.SubmitScore(memberID.ToString(), distanceTracker.distanceUnit, distanceLeaderboardID, (response) =>
+        LootLockerSDKManager.SubmitScore(playerID, distanceTracker.distanceUnit, distanceLeaderboardID, (response) =>
         {
             if (!response.success)
             {
@@ -95,7 +98,15 @@ public class LeaderboardManager : MonoBehaviour
 
             for(int i = 0; i < scores.Length; i++)
             {
-                returnedScores[i].text = (scores[i].rank + ". " + scores[i].member_id + " " + scores[i].score);
+                if(scores[i].player.name != "")
+                {
+                    returnedScores[i].text = (scores[i].rank + ". " + scores[i].player.name + " " + scores[i].score);
+                }
+                else
+                {
+                    returnedScores[i].text = (scores[i].rank + ". " + scores[i].player.id + " " + scores[i].score);
+                }
+                
             }
 
             if(scores.Length < maxScores)
@@ -108,9 +119,18 @@ public class LeaderboardManager : MonoBehaviour
         });
     }
 
-    // Will replace with Input for User Name
-    public void GenerateMemberID()
+    public void SaveName()
     {
-        memberID = Random.Range(0, 999999);
+        LootLockerSDKManager.SetPlayerName(playerNameInputField.text, (response) =>
+        {
+            if (response.success)
+            {
+                Debug.Log("Player name saved successfully. ");
+            }
+            else
+            {
+                Debug.Log("Could not save player name. " + response.Error);
+            }
+        });
     }
 }
