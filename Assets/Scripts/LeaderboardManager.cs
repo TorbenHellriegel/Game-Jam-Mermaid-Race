@@ -24,29 +24,12 @@ public class LeaderboardManager : MonoBehaviour
         playerID = PlayerPrefs.GetString("PlayerID");
         maxScores = returnedScores.Length;
         ConnectToLootLockerAsGuest();
-        // ConnectToLootLockerAsUser();
     }
 
     // Used for testing
     public void ConnectToLootLockerAsGuest()
     {
         LootLockerSDKManager.StartGuestSession((response) =>
-        {
-            if (!response.success)
-            {
-                Debug.Log("error starting LootLocker session");
-
-                return;
-            }
-
-            Debug.Log("successfully started LootLocker session");
-        });
-    }
-
-    // Will grab user's Android Username to fill information and connect
-    public void ConnectToLootLockerAsUser()
-    {
-        LootLockerSDKManager.StartSession("Player", (response) =>
         {
             if (!response.success)
             {
