@@ -21,7 +21,11 @@ public class SharkController : MonoBehaviour
     }
     void Update()
     {
-        CheckTranform();
+        if(playerHealth.health > 0)
+        {
+            transform.position = CalculatePosition();
+        }
+        //CheckTranform();
 
         if (gameOver)
         {
@@ -35,38 +39,11 @@ public class SharkController : MonoBehaviour
         }
     }
 
-    void CheckTranform()
+    private Vector3 CalculatePosition()
     {
-        switch (playerHealth.health)
-        {
-            case 4:
-                {
-                    transform.position = new Vector3(0, 0, -9);
-                    break;
-                }
-            case 3:
-                {
-                    transform.position = new Vector3(0, 0, -7);
-                    break;
-                }
-            case 2:
-                {
-                    transform.position = new Vector3(0, 0, -5);
-                    break;
-                }
-
-            case 1:
-                {
-                    transform.position = new Vector3(0, 0, -3);
-                    break;
-                }
-
-            case 0:
-                {
-                    transform.position = new Vector3(0, 0, 0);
-                    break;
-                }
-        }
+        Vector3 player = playerHealth.gameObject.transform.position;
+        int health = playerHealth.health;
+        return new Vector3(player.x, 0, -1 -2*health);
     }
 
     void Jump()
