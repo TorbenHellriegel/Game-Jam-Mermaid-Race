@@ -6,8 +6,6 @@ PLayable here: https://torbenhellriegel.itch.io/mermaid-surfer
 
 You are a mermaid trying to outrun a great white shark. Collect as many Starfish as you can before the shark catches you! Don’t forget to watch out for the pufferfish and to dive under or jump over the buoys!
 
-(Secret: Click the main menu stars)
-
 A or Left Arrow to move Left.
 
 D or Right Arrow to move Right.
