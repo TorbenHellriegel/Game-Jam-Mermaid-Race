@@ -71,7 +71,7 @@ public class PlayerHealth : MonoBehaviour
         {
             maxHealth++;
         }
-        else
+        else if(health < maxHealth)
         {
             health += amount;
         }
