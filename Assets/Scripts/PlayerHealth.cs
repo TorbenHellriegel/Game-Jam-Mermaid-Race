@@ -80,7 +80,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void LooseLives(int amount)
     {
-        //health -= amount;
+        health -= amount;
         SetHealth();
         CheckForDeath();
     }

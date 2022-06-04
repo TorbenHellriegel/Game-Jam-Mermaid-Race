@@ -48,7 +48,7 @@ public class MainMenu : MonoBehaviour
         {
             PlayerPrefs.SetInt("Character", 2);
         }
-        SceneManager.LoadScene("SwimmingPool");
+        SceneManager.LoadScene("EndlessMode");
     }
 
     public void ExitGame()
