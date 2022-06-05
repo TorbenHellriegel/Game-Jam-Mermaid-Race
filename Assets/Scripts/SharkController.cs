@@ -6,66 +6,71 @@ public class SharkController : MonoBehaviour
 {
     public PlayerHealth playerHealth;
     public GameObject cam;
-    private bool gameOver = false;
-    private bool facingCamera = false;
-    private float timeElapsed;
     public AudioSource sharkAudioSource;
     public AudioClip sharkAttack;
+    private string sharkState;
+    private float timeElapsed;
 
     private void Start()
     {
         playerHealth = FindObjectOfType<PlayerHealth>();
-        facingCamera = false;
-        timeElapsed = 0;
         sharkAudioSource = GetComponent<AudioSource>();
+        sharkState = "FollowPlayer";
+        timeElapsed = 0;
     }
     void Update()
     {
-        if(playerHealth.health > 0)
+        switch (sharkState)
         {
-            transform.position = CalculatePosition();
-        }
-        //CheckTranform();
-
-        if (gameOver)
-        {
-            transform.Rotate(new Vector3(0, 150, 0) * Time.deltaTime);
-        }
-
-        if (facingCamera)
-        {
-            timeElapsed += Time.deltaTime;
-            transform.Translate(new Vector3(0, 2, 20) * timeElapsed);
+            case "FollowPlayer":
+                FollowPlayer();
+                break;
+            case "TurnToCamera":
+                TurnToCamera();
+                break;
+            case "JumpAtCamera":
+                JumpAtCamera();
+                break;
+            default:
+                break;
         }
     }
 
-    private Vector3 CalculatePosition()
+    private void FollowPlayer()
     {
         Vector3 player = playerHealth.gameObject.transform.position;
         int health = playerHealth.health;
-        return new Vector3(player.x, 0, -1 -2*health);
+        transform.position =  new Vector3(player.x, 0, -1 -2*health);
+    }
+
+    private void TurnToCamera()
+    {
+        transform.Rotate(new Vector3(0, 150, 0) * Time.deltaTime);
+    }
+
+    private void JumpAtCamera()
+    {
+        timeElapsed += Time.deltaTime;
+        transform.Translate(new Vector3(0, 2, 20) * timeElapsed);
     }
 
     void Jump()
     {
         transform.Rotate(new Vector3(-25, 0, 0));
-        facingCamera = true;
+        timeElapsed = 0;
+        sharkState = "JumpAtCamera";
     }
 
     void StopRotation()
     {
-        gameOver = false;
+        sharkState = "null";
         Invoke("Jump", 0.5f);
     }
 
     public void EndOfGameMovement()
     {
-        //transform.Rotate(new Vector3(-25, 180, 0));
-        gameOver = true;
+        sharkState = "TurnToCamera";
         sharkAudioSource.PlayOneShot(sharkAttack);
         Invoke("StopRotation", 1.2f);
-        //facingCamera = true;
-
-        // Trigger Shark Laugh
     }
 }
