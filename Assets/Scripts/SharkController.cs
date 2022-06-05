@@ -11,6 +11,7 @@ public class SharkController : MonoBehaviour
 
     private string sharkState;
     private float timeElapsed;
+    private Vector3 playerPosition;
     private Vector3 direction;
     private Quaternion lookRotation;
 
@@ -41,9 +42,15 @@ public class SharkController : MonoBehaviour
 
     private void FollowPlayer()
     {
-        Vector3 player = playerHealth.gameObject.transform.position;
-        int health = playerHealth.health;
-        transform.position =  new Vector3(player.x, 0, -1 -2*health);
+        if(playerPosition.x != playerHealth.gameObject.transform.position.x)
+        {
+            playerPosition = playerHealth.gameObject.transform.position;
+            timeElapsed = 0;
+        }
+        
+        timeElapsed += Time.deltaTime / 25;
+
+        transform.position = Vector3.Lerp(transform.position, new Vector3(playerPosition.x, 0, -1 -2*playerHealth.health), timeElapsed);
     }
 
     private void TurnToCamera()
