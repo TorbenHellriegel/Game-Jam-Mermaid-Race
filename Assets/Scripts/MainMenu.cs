@@ -9,6 +9,13 @@ public class MainMenu : MonoBehaviour
     public GameObject character2;
     public GameObject character3;
 
+    // Start is called before the first frame update
+    void Start()
+    {
+        string difficulty = PlayerPrefs.GetString("Difficulty", "Medium");
+        PlayerPrefs.SetString("Difficulty", difficulty);
+    }
+
     public void ExitButton()
     {
         #if UNITY_EDITOR

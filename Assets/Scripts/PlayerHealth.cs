@@ -19,6 +19,27 @@ public class PlayerHealth : MonoBehaviour
     private void Awake()
     {
         gameManager = FindObjectOfType<GameManager>();
+
+        switch (PlayerPrefs.GetString("Difficulty", "Medium"))
+        {
+            case "Easy":
+                health = 4;
+                maxHealth = 4;
+                break;
+            case "Medium":
+                health = 3;
+                maxHealth = 3;
+                break;
+            case "Hard":
+                health = 2;
+                maxHealth = 2;
+                break;
+            default:
+                health = 3;
+                maxHealth = 3;
+                break;
+        }
+
         SetHealth();
     }
 

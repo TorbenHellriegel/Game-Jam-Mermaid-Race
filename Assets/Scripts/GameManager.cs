@@ -40,10 +40,28 @@ public class GameManager : MonoBehaviour
         distanceTracker = FindObjectOfType<DistanceTracker>();
 
         rnd = new System.Random();
-        Time.timeScale = 1;
         isGameOver = false;
         spawnedSegments = 0;
-        difficulty = 1;
+
+        switch (PlayerPrefs.GetString("Difficulty", "Medium"))
+        {
+            case "Easy":
+                Time.timeScale = 0.9f;
+                difficulty = 1;
+                break;
+            case "Medium":
+                Time.timeScale = 1;
+                difficulty = 3;
+                break;
+            case "Hard":
+                Time.timeScale = 1.2f;
+                difficulty = 5;
+                break;
+            default:
+                Time.timeScale = 1;
+                difficulty = 3;
+                break;
+        }
 
         // Spawn the selected character
         int CharacterIndex = PlayerPrefs.GetInt("Character");
