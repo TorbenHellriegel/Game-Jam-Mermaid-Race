@@ -157,7 +157,7 @@ public class GameManager : MonoBehaviour
     {
         CancelInvoke(nameof(SpawnSegment));
         shark.EndOfGameMovement();
-        Invoke(nameof(GameOverScreen), 2.1f);
+        Invoke(nameof(GameOverScreen), 2.3f);
     }
 
     void GameOverScreen()

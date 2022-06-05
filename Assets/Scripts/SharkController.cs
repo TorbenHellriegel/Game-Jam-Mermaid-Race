@@ -8,8 +8,11 @@ public class SharkController : MonoBehaviour
     public GameObject cam;
     public AudioSource sharkAudioSource;
     public AudioClip sharkAttack;
+
     private string sharkState;
     private float timeElapsed;
+    private Vector3 direction;
+    private Quaternion lookRotation;
 
     private void Start()
     {
@@ -45,32 +48,28 @@ public class SharkController : MonoBehaviour
 
     private void TurnToCamera()
     {
-        transform.Rotate(new Vector3(0, 150, 0) * Time.deltaTime);
+        timeElapsed += Time.deltaTime / 25;
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, timeElapsed);
     }
 
     private void JumpAtCamera()
     {
-        timeElapsed += Time.deltaTime;
-        transform.Translate(new Vector3(0, 2, 20) * timeElapsed);
-    }
-
-    void Jump()
-    {
-        transform.Rotate(new Vector3(-25, 0, 0));
-        timeElapsed = 0;
-        sharkState = "JumpAtCamera";
-    }
-
-    void StopRotation()
-    {
-        sharkState = "null";
-        Invoke("Jump", 0.5f);
+        transform.Translate(new Vector3(0, 0, 20) * Time.deltaTime);
     }
 
     public void EndOfGameMovement()
     {
+        timeElapsed = 0;
+        direction = (cam.transform.position - transform.position).normalized;
+        lookRotation = Quaternion.LookRotation(direction);
         sharkState = "TurnToCamera";
         sharkAudioSource.PlayOneShot(sharkAttack);
-        Invoke("StopRotation", 1.2f);
+        Invoke("StopRotation", 2);
+    }
+
+    private void StopRotation()
+    {
+        timeElapsed = 0;
+        sharkState = "JumpAtCamera";
     }
 }
