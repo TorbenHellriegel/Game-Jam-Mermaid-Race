@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
+        character = GameObject.FindGameObjectWithTag("Character");
 
         diveTimer = 0;
         currentPosition = 1;
@@ -79,9 +80,11 @@ public class PlayerController : MonoBehaviour
         {
             swichDistance += Time.deltaTime*20;
             swichDistance = Mathf.Min(swichDistance, 1);
+
             transform.position = Vector3.Lerp(new Vector3(position[currentPosition].x, transform.position.y, transform.position.z),
                                             new Vector3(position[nextPosition].x, transform.position.y, transform.position.z),
                                             swichDistance);
+
             if(position[nextPosition].x == transform.position.x)
             {
                 currentPosition = nextPosition;

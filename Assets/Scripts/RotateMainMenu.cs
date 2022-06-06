@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RotateMainMenu : MonoBehaviour
 {
-    private float fly;
+    private float hight;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +24,7 @@ public class RotateMainMenu : MonoBehaviour
             transform.Rotate(new Vector3(0, 1, 0));
         }
 
-        fly += Time.deltaTime;
-        transform.position = new Vector3(transform.position.x, Mathf.Sin(fly)-2, transform.position.z);
+        hight += Time.deltaTime;
+        transform.position = new Vector3(transform.position.x, Mathf.Sin(hight)-2, transform.position.z);
     }
 }
