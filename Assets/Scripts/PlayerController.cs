@@ -15,10 +15,13 @@ public class PlayerController : MonoBehaviour
     private float diveTimer;
     public float timeBetweenDives = 1;
     [Header("Control Varaibles")]
+    private GameObject character;
     public int currentPosition;
     public int nextPosition;
     private float swichDistance;
     private Vector3[] position = new Vector3[] {new Vector3(-5, 0, 0), new Vector3(0, 0, 0), new Vector3(5, 0, 0)};
+    private float rotation = 0;
+    private float rotationSpeed = 30;
     public float floatSpeed;
     [Header("Particle Systems")]
     public ParticleSystem rockCrash;
@@ -35,6 +38,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
+        character = GameObject.FindGameObjectWithTag("Character");
 
         diveTimer = 0;
         currentPosition = 1;
@@ -79,13 +83,51 @@ public class PlayerController : MonoBehaviour
         {
             swichDistance += Time.deltaTime*20;
             swichDistance = Mathf.Min(swichDistance, 1);
+
             transform.position = Vector3.Lerp(new Vector3(position[currentPosition].x, transform.position.y, transform.position.z),
                                             new Vector3(position[nextPosition].x, transform.position.y, transform.position.z),
                                             swichDistance);
+
+            if(currentPosition < nextPosition)
+            {
+                RotateRight();
+            }
+            else
+            {
+                RotateLeft();
+            }
+
             if(position[nextPosition].x == transform.position.x)
             {
+                rotation = 0;
                 currentPosition = nextPosition;
             }
+        }
+    }
+
+    private void RotateRight()
+    {
+        if(rotation < 360)
+        {
+            rotation += rotationSpeed;
+            character.transform.Rotate(0, 0, -rotationSpeed, Space.Self);
+        }
+        else
+        {
+            transform.rotation = Quaternion.identity;
+        }
+    }
+
+    private void RotateLeft()
+    {
+        if(rotation < 360)
+        {
+            rotation += rotationSpeed;
+            character.transform.Rotate(0, 0, rotationSpeed, Space.Self);
+        }
+        else
+        {
+            transform.rotation = Quaternion.identity;
         }
     }
 
