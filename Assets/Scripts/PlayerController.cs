@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     private float swichDistance;
     private Vector3[] position = new Vector3[] {new Vector3(-5, 0, 0), new Vector3(0, 0, 0), new Vector3(5, 0, 0)};
     private float rotation = 0;
-    private float rotationSpeed = 30;
+    private float rotationSpeed = 300;
     public float floatSpeed;
     [Header("Particle Systems")]
     public ParticleSystem rockCrash;

@@ -63,8 +63,6 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
-        Time.timeScale = 0.2f;
-
         // Spawn the selected character
         int CharacterIndex = PlayerPrefs.GetInt("Character");
         characters[CharacterIndex].SetActive(true);
