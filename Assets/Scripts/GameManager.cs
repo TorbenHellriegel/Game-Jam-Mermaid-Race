@@ -84,23 +84,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // Swich between horizintal and vertical play on mobile
-        // if (Screen.orientation == ScreenOrientation.LandscapeLeft) 
-        // {
-        //     Debug.Log("DETECTET Screen.orientation == ScreenOrientation.LandscapeLeft");
-        // }
-        // else if (Screen.orientation == ScreenOrientation.LandscapeRight)
-        // {
-        //     Debug.Log("DETECTET Screen.orientation == ScreenOrientation.LandscapeRight");
-        // }
-        // else if (Screen.orientation == ScreenOrientation.Portrait)
-        // {
-        //     Debug.Log("DETECTET Screen.orientation == ScreenOrientation.Portrait");
-        // }
-        // else if (Screen.orientation == ScreenOrientation.PortraitUpsideDown)
-        // {
-        //     Debug.Log("DETECTET Screen.orientation == ScreenOrientation.PortraitUpsideDown");
-        // }
-        // else if (Input.deviceOrientation == DeviceOrientation.Portrait)
+        // if (Input.deviceOrientation == DeviceOrientation.Portrait)
         // {
         //     Debug.Log("DETECTET Input.deviceOrientation == DeviceOrientation.Portrait");
         // }
@@ -115,6 +99,22 @@ public class GameManager : MonoBehaviour
         // else if (Input.deviceOrientation == DeviceOrientation.LandscapeRight)
         // {
         //     Debug.Log("DETECTET Input.deviceOrientation == DeviceOrientation.LandscapeRight");
+        // }
+        // else if (Screen.orientation == ScreenOrientation.LandscapeLeft) 
+        // {
+        //     Debug.Log("DETECTET Screen.orientation == ScreenOrientation.LandscapeLeft");
+        // }
+        // else if (Screen.orientation == ScreenOrientation.LandscapeRight)
+        // {
+        //     Debug.Log("DETECTET Screen.orientation == ScreenOrientation.LandscapeRight");
+        // }
+        // else if (Screen.orientation == ScreenOrientation.Portrait)
+        // {
+        //     Debug.Log("DETECTET Screen.orientation == ScreenOrientation.Portrait");
+        // }
+        // else if (Screen.orientation == ScreenOrientation.PortraitUpsideDown)
+        // {
+        //     Debug.Log("DETECTET Screen.orientation == ScreenOrientation.PortraitUpsideDown");
         // }
 
         if(!isGameOver)
