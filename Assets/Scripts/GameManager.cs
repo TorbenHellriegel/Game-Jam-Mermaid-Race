@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI finalScoreText;
     public TextMeshProUGUI distanceTraveledText;
     public GameObject pauseMenu;
+    public GameObject playerStatsDisplay;
     public int finalScore = 0;
     [Header("Game Management")]
     public bool isGameOver = false;
@@ -84,38 +85,14 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // Swich between horizintal and vertical play on mobile
-        // if (Screen.orientation == ScreenOrientation.LandscapeLeft) 
-        // {
-        //     Debug.Log("DETECTET Screen.orientation == ScreenOrientation.LandscapeLeft");
-        // }
-        // else if (Screen.orientation == ScreenOrientation.LandscapeRight)
-        // {
-        //     Debug.Log("DETECTET Screen.orientation == ScreenOrientation.LandscapeRight");
-        // }
-        // else if (Screen.orientation == ScreenOrientation.Portrait)
-        // {
-        //     Debug.Log("DETECTET Screen.orientation == ScreenOrientation.Portrait");
-        // }
-        // else if (Screen.orientation == ScreenOrientation.PortraitUpsideDown)
-        // {
-        //     Debug.Log("DETECTET Screen.orientation == ScreenOrientation.PortraitUpsideDown");
-        // }
-        // else if (Input.deviceOrientation == DeviceOrientation.Portrait)
-        // {
-        //     Debug.Log("DETECTET Input.deviceOrientation == DeviceOrientation.Portrait");
-        // }
-        // else if (Input.deviceOrientation == DeviceOrientation.PortraitUpsideDown)
-        // {
-        //     Debug.Log("DETECTET Input.deviceOrientation == DeviceOrientation.PortraitUpsideDown");
-        // }
-        // else if (Input.deviceOrientation == DeviceOrientation.LandscapeLeft)
-        // {
-        //     Debug.Log("DETECTET Input.deviceOrientation == DeviceOrientation.LandscapeLeft");
-        // }
-        // else if (Input.deviceOrientation == DeviceOrientation.LandscapeRight)
-        // {
-        //     Debug.Log("DETECTET Input.deviceOrientation == DeviceOrientation.LandscapeRight");
-        // }
+        if(Input.deviceOrientation == DeviceOrientation.Portrait || Input.deviceOrientation == DeviceOrientation.PortraitUpsideDown)
+        {
+            playerStatsDisplay.transform.localScale = new Vector3(0.7f, 0.7f, 0);
+        }
+        else if(Input.deviceOrientation == DeviceOrientation.LandscapeLeft || Input.deviceOrientation == DeviceOrientation.LandscapeRight)
+        {
+            playerStatsDisplay.transform.localScale = new Vector3(1.3f, 1.3f, 0);
+        }
 
         if(!isGameOver)
         {
