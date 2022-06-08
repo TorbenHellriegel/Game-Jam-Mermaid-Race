@@ -45,12 +45,9 @@ public class SharkController : MonoBehaviour
         if(playerPosition.x != playerHealth.gameObject.transform.position.x)
         {
             playerPosition = playerHealth.gameObject.transform.position;
-            timeElapsed = 0;
         }
-        
-        timeElapsed += Time.deltaTime / 25;
 
-        transform.position = Vector3.Lerp(transform.position, new Vector3(playerPosition.x, 0, -1 -2*playerHealth.health), timeElapsed);
+        transform.position = Vector3.Lerp(transform.position, new Vector3(playerPosition.x, 0, -1 -2*playerHealth.health), 0.03f);
     }
 
     private void TurnToCamera()
