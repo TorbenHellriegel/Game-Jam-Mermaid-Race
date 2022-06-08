@@ -9,16 +9,21 @@ public class MenuLeaderboardManager : MonoBehaviour
 
     public TMP_InputField playerNameInputField;
     private string playerID;
-    public int scoreLeaderboardID = 3314;
-    public int distanceLeaderboardID = 3315;
+    private int scoreLeaderboardID;
+    private int distanceLeaderboardID;
     private int maxScores = 10;
+    public TextMeshProUGUI[] returnedRanks;
+    public TextMeshProUGUI[] returnedNames;
     public TextMeshProUGUI[] returnedScores;
+    public TextMeshProUGUI[] returnedDistances;
+    private int difficulty;
 
     // Start is called before the first frame update
     void Start()
     {
         playerID = PlayerPrefs.GetString("PlayerID");
         maxScores = returnedScores.Length;
+        SetDifficulty(3);
         ConnectToLootLockerAsGuest();
     }
 
@@ -40,6 +45,22 @@ public class MenuLeaderboardManager : MonoBehaviour
 
     public void ShowScores()
     {
+        switch (difficulty)
+        {
+            case 1:
+                scoreLeaderboardID = 3328;
+                distanceLeaderboardID = 3329;
+                break;
+            case 3:
+                scoreLeaderboardID = 3616;
+                distanceLeaderboardID = 3617;
+                break;
+            case 5:
+                scoreLeaderboardID = 3618;
+                distanceLeaderboardID = 3619;
+                break;
+        }
+
         LootLockerSDKManager.GetScoreList(scoreLeaderboardID, maxScores, (response) =>
         {
             LootLockerLeaderboardMember[] scores = response.items;
@@ -48,11 +69,16 @@ public class MenuLeaderboardManager : MonoBehaviour
             {
                 if (scores[i].player.name != "")
                 {
-                    returnedScores[i].text = (scores[i].rank + ". " + scores[i].player.name + " " + scores[i].score);
+                    returnedRanks[i].text = scores[i].rank.ToString();
+                    returnedNames[i].text = scores[i].player.name;
+                    returnedScores[i].text = scores[i].score.ToString();
                 }
                 else
                 {
-                    returnedScores[i].text = (scores[i].rank + ". " + scores[i].player.id + " " + scores[i].score);
+                    returnedRanks[i].text = scores[i].rank.ToString();
+                    // may change to playerprefs playerID?
+                    returnedNames[i].text = scores[i].player.id.ToString();
+                    returnedScores[i].text = scores[i].score.ToString();
                 }
 
             }
@@ -61,7 +87,24 @@ public class MenuLeaderboardManager : MonoBehaviour
             {
                 for (int i = scores.Length; i < maxScores; i++)
                 {
-                    returnedScores[i].text = (i + 1).ToString() + ". None";
+                    returnedScores[i].text = "0";
+                }
+            }
+        });
+
+        LootLockerSDKManager.GetScoreList(distanceLeaderboardID, maxScores, (response) =>
+        {
+            LootLockerLeaderboardMember[] distances = response.items;
+            for (int i = 0; i < distances.Length; i++)
+            {
+                    returnedDistances[i].text = distances[i].score.ToString() + " m";
+            }
+
+            if (distances.Length < maxScores)
+            {
+                for (int i = distances.Length; i < maxScores; i++)
+                {
+                    returnedDistances[i].text = "0" + " m";
                 }
             }
         });
@@ -80,5 +123,10 @@ public class MenuLeaderboardManager : MonoBehaviour
                 Debug.Log("Could not save player name. " + response.Error);
             }
         });
+    }
+
+    public void SetDifficulty(int gameDifficuly)
+    {
+        difficulty = gameDifficuly;
     }
 }
