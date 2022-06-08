@@ -35,7 +35,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
-        character = GameObject.FindGameObjectWithTag("Character");
 
         diveTimer = 0;
         currentPosition = 1;

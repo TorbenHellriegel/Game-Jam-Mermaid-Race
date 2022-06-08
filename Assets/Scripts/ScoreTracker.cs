@@ -40,7 +40,7 @@ public class ScoreTracker : MonoBehaviour
     }
     private void GainScore(int amount)
     {
-        score += Mathf.RoundToInt(amount * Time.timeScale);
+        score += Mathf.RoundToInt(amount * Time.timeScale * scoreMultiplyer);
         scoreText.text = score.ToString();
     }
 }
