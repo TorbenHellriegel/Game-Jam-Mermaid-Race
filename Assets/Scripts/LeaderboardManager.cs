@@ -11,8 +11,8 @@ public class LeaderboardManager : MonoBehaviour
     public TextMeshProUGUI playerScore, playerDistance;
     public TMP_InputField playerNameInputField;
     private string playerID;
-    public int scoreLeaderboardID = 3314;
-    public int distanceLeaderboardID = 3315;
+    private int scoreLeaderboardID;
+    private int distanceLeaderboardID;
     private int maxScores = 10;
     public TextMeshProUGUI[] returnedScores;
 

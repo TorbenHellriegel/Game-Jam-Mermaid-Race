@@ -8,7 +8,8 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRb;
     private PlayerSFX playerSFX;
-    
+    private GameObject character;
+
     [Header("Dive Variables")]
     public float speed;
     public float diveSpeed;

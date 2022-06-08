@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     public float lastTimeScale;
     private System.Random rnd;
     private DistanceTracker distanceTracker;
-    private int difficulty;
+    public int difficulty;
     private int maxDifficulty = 6;
 
     // Start is called before the first frame update
