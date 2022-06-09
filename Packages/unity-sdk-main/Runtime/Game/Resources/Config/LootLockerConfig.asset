@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: LootLockerConfig
   m_EditorClassIdentifier: 
   apiKey: fa4d2461b7e0c140da8179bc9a1764d9c90e334e
-  token: 1697ee7041f3b0b4413031dd3ab83baa1f635c3d
+  token: 4b64c21068882aa3aa36580f0802cfb2853c22ae
   adminToken: 
   domainKey: 
   gameID: 0
-  game_version: 1.0.0.2
+  game_version: 1.0.0.3
   deviceID: b3350179-da47-4a62-9bd1-83e18f17510f
   platform: 0
   developmentMode: 0

@@ -14,7 +14,11 @@ public class LeaderboardManager : MonoBehaviour
     private int scoreLeaderboardID;
     private int distanceLeaderboardID;
     private int maxScores = 10;
+    public TextMeshProUGUI[] returnedRanks;
+    public TextMeshProUGUI[] returnedNames;
     public TextMeshProUGUI[] returnedScores;
+    public TextMeshProUGUI[] returnedDistances;
+    private int difficulty;
 
     // Start is called before the first frame update
     void Start()
@@ -40,10 +44,29 @@ public class LeaderboardManager : MonoBehaviour
 
             Debug.Log("successfully started LootLocker session");
         });
+
+        difficulty = gameManager.difficulty;
     }
 
     public void SubmitScore()
     {
+        difficulty = gameManager.difficulty;
+        switch (difficulty)
+        {
+            case 1:
+                scoreLeaderboardID = 3328;
+                distanceLeaderboardID = 3329;
+                break;
+            case 3:
+                scoreLeaderboardID = 3616;
+                distanceLeaderboardID = 3617;
+                break;
+            case 5:
+                scoreLeaderboardID = 3618;
+                distanceLeaderboardID = 3619;
+                break;
+        }
+
         LootLockerSDKManager.SubmitScore(playerID, gameManager.finalScore, scoreLeaderboardID, (response) =>
         {
             if (!response.success)
@@ -59,6 +82,23 @@ public class LeaderboardManager : MonoBehaviour
 
     public void SubmitDistance()
     {
+        difficulty = gameManager.difficulty;
+        switch (difficulty)
+        {
+            case 1:
+                scoreLeaderboardID = 3328;
+                distanceLeaderboardID = 3329;
+                break;
+            case 3:
+                scoreLeaderboardID = 3616;
+                distanceLeaderboardID = 3617;
+                break;
+            case 5:
+                scoreLeaderboardID = 3618;
+                distanceLeaderboardID = 3619;
+                break;
+        }
+
         LootLockerSDKManager.SubmitScore(playerID, distanceTracker.distanceUnit, distanceLeaderboardID, (response) =>
         {
             if (!response.success)
@@ -74,28 +114,68 @@ public class LeaderboardManager : MonoBehaviour
 
     public void ShowScores()
     {
+        difficulty = gameManager.difficulty;
+        switch (difficulty)
+        {
+            case 1:
+                scoreLeaderboardID = 3328;
+                distanceLeaderboardID = 3329;
+                break;
+            case 3:
+                scoreLeaderboardID = 3616;
+                distanceLeaderboardID = 3617;
+                break;
+            case 5:
+                scoreLeaderboardID = 3618;
+                distanceLeaderboardID = 3619;
+                break;
+        }
+
         LootLockerSDKManager.GetScoreList(scoreLeaderboardID, maxScores, (response) =>
         {
             LootLockerLeaderboardMember[] scores = response.items;
 
-            for(int i = 0; i < scores.Length; i++)
+            for (int i = 0; i < scores.Length; i++)
             {
-                if(scores[i].player.name != "")
+                if (scores[i].player.name != "")
                 {
-                    returnedScores[i].text = (scores[i].rank + ". " + scores[i].player.name + " " + scores[i].score);
+                    returnedRanks[i].text = scores[i].rank.ToString();
+                    returnedNames[i].text = scores[i].player.name;
+                    returnedScores[i].text = scores[i].score.ToString();
                 }
                 else
                 {
-                    returnedScores[i].text = (scores[i].rank + ". " + scores[i].player.id + " " + scores[i].score);
+                    returnedRanks[i].text = scores[i].rank.ToString();
+                    // may change to playerprefs playerID?
+                    returnedNames[i].text = scores[i].player.id.ToString();
+                    returnedScores[i].text = scores[i].score.ToString();
                 }
-                
+
             }
 
-            if(scores.Length < maxScores)
+            if (scores.Length < maxScores)
             {
-                for(int i = scores.Length; i < maxScores; i++)
+                for (int i = scores.Length; i < maxScores; i++)
                 {
-                    returnedScores[i].text = (i + 1).ToString() + ". None"; 
+                    returnedNames[i].text = "None";
+                    returnedScores[i].text = "0";
+                }
+            }
+        });
+
+        LootLockerSDKManager.GetScoreList(distanceLeaderboardID, maxScores, (response) =>
+        {
+            LootLockerLeaderboardMember[] distances = response.items;
+            for (int i = 0; i < distances.Length; i++)
+            {
+                returnedDistances[i].text = distances[i].score.ToString() + " m";
+            }
+
+            if (distances.Length < maxScores)
+            {
+                for (int i = distances.Length; i < maxScores; i++)
+                {
+                    returnedDistances[i].text = "0" + " m";
                 }
             }
         });
@@ -116,3 +196,4 @@ public class LeaderboardManager : MonoBehaviour
         });
     }
 }
+

@@ -87,6 +87,7 @@ public class MenuLeaderboardManager : MonoBehaviour
             {
                 for (int i = scores.Length; i < maxScores; i++)
                 {
+                    returnedNames[i].text = "None";
                     returnedScores[i].text = "0";
                 }
             }
