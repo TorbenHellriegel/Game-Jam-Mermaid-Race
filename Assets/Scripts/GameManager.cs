@@ -84,16 +84,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Swich between horizintal and vertical play on mobile
-        if(Input.deviceOrientation == DeviceOrientation.Portrait || Input.deviceOrientation == DeviceOrientation.PortraitUpsideDown)
-        {
-            playerStatsDisplay.transform.localScale = new Vector3(0.7f, 0.7f, 0);
-        }
-        else if(Input.deviceOrientation == DeviceOrientation.LandscapeLeft || Input.deviceOrientation == DeviceOrientation.LandscapeRight)
-        {
-            playerStatsDisplay.transform.localScale = new Vector3(1.3f, 1.3f, 0);
-        }
-
         if(!isGameOver)
         {
             finalScore = FindObjectOfType<ScoreTracker>().score;
