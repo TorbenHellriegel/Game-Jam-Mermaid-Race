@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public float diveSpeed;
     private float diveTimer;
+    private bool isDiving;
     public float timeBetweenDives = 1;
     [Header("Control Varaibles")]
     public int currentPosition;
@@ -38,6 +39,7 @@ public class PlayerController : MonoBehaviour
         playerRb = GetComponent<Rigidbody>();
 
         diveTimer = 0;
+        isDiving = false;
         currentPosition = 1;
         nextPosition = 1;
 
@@ -58,6 +60,15 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
         {
             Dive();
+        }
+
+        // If the player hits the water after diving play the dive sound and vfx
+        if(isDiving && transform.position.y < 0)
+        {
+            isDiving = false;
+            Instantiate(waterSplash, transform.position, waterSplash.transform.rotation);
+            // Figure out a way to call this just from PlayerSFX script to clean this up.
+            playerSFX.PlayJumpAudio();
         }
         
         // Swich lanes left and right
@@ -115,10 +126,7 @@ public class PlayerController : MonoBehaviour
         if (diveTimer > timeBetweenDives)
         {
             playerRb.AddForce(Vector3.down * diveSpeed, ForceMode.Impulse);
-            Instantiate(waterSplash, transform.position,
-            waterSplash.transform.rotation);
-            // Figure out a way to call this just from PlayerSFX script to clean this up.
-            playerSFX.PlayJumpAudio();
+            isDiving = true;
             diveTimer = 0;
         }
 
