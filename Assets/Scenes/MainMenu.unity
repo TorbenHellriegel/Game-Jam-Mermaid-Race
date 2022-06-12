@@ -11143,7 +11143,7 @@ GameObject:
   - component: {fileID: 1021222861}
   - component: {fileID: 1021222862}
   m_Layer: 5
-  m_Name: Toggle
+  m_Name: ControlsToggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11218,8 +11218,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1901948166}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: swipeControlsEnabled
-        m_Mode: 0
+        m_MethodName: SwipeControlsEnabled
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -19496,6 +19496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25dd5d93bd2d9a74d8994f3e08a7d243, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ControlToggle: {fileID: 1021222862}
   character1: {fileID: 1528827119}
   character2: {fileID: 1156199545}
   character3: {fileID: 1253402336}
@@ -20762,6 +20763,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1901948166}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: SetControlsToggle
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
