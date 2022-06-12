@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class SwipeManager : MonoBehaviour
 {
     public PlayerController player;
+    public GameObject controlButtons;
+
+    private bool swipeControls;
 
     public static bool tap, swipeLeft, swipeRight, swipeUp, swipeDown;
     private bool isDraging = false;
@@ -14,9 +17,32 @@ public class SwipeManager : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        SetControlType();
     }
 
     private void Update()
+    {
+        if(swipeControls)
+        {
+            DetectSwipe();
+        }
+    }
+
+    public void SetControlType()
+    {
+        if(PlayerPrefs.GetString("ControlType", "Tap") == "Swipe" )
+        {
+            swipeControls = true;
+            controlButtons.SetActive(false);
+        }
+        else
+        {
+            swipeControls = false;
+            controlButtons.SetActive(true);
+        }
+    }
+
+    private void DetectSwipe()
     {
         tap = swipeDown = swipeUp = swipeLeft = swipeRight = false;
         
@@ -100,7 +126,6 @@ public class SwipeManager : MonoBehaviour
 
             Reset();
         }
-
     }
 
     private void Reset()

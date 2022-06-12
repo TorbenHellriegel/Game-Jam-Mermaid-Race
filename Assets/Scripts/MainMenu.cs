@@ -56,7 +56,7 @@ public class MainMenu : MonoBehaviour
         {
             ControlToggle.isOn = true;
         }
-        else if(PlayerPrefs.GetString("ControlType", "Tap") == "Tap" )
+        else
         {
             ControlToggle.isOn = false;
         }
