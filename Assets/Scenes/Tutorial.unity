@@ -3579,7 +3579,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 446529021}
-  - component: {fileID: 446529022}
   - component: {fileID: 446529020}
   m_Layer: 0
   m_Name: GameManager
@@ -3614,20 +3613,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &446529022
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 446529019}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bdb83adb7d5b044184bf671ca8a4de4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  controlButtons: {fileID: 654760756}
 --- !u!1 &458252892
 GameObject:
   m_ObjectHideFlags: 0
@@ -8044,7 +8029,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 446529022}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SwipeManager, Assembly-CSharp
         m_MethodName: SetControlType
         m_Mode: 1
