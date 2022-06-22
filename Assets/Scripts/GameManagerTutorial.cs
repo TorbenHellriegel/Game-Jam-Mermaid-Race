@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class GameManagerTutorial : MonoBehaviour
 {
+    public GameObject leftButton;
+    public GameObject rightButton;
+    public GameObject downButton;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +18,10 @@ public class GameManagerTutorial : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void TutorialPrompt(int tutorialPromptNumber)
+    {
+        Time.timeScale = 0;
     }
 }
