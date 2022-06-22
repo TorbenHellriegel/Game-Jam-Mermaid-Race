@@ -20,11 +20,6 @@ public class MainMenu : MonoBehaviour
         PlayerPrefs.SetString("ControlType", PlayerPrefs.GetString("ControlType", "Tap"));
     }
 
-    void Update()
-    {
-        Debug.Log(PlayerPrefs.GetString("ControlType"));
-    }
-
     public void ExitButton()
     {
         #if UNITY_EDITOR
