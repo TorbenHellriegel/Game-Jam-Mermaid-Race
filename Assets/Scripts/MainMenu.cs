@@ -8,9 +8,10 @@ public class MainMenu : MonoBehaviour
 {
     public Toggle ControlToggle;
 
-    public GameObject character1;
-    public GameObject character2;
-    public GameObject character3;
+    public GameObject[] character;
+
+    public GameObject gameModeTutorial;
+    public GameObject gameModeEndless;
 
     // Start is called before the first frame update
     void Start()
@@ -59,19 +60,27 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
-        if(character1.activeSelf)
+        if(character[0].activeSelf)
         {
             PlayerPrefs.SetInt("Character", 0);
         }
-        else if(character2.activeSelf)
+        else if(character[1].activeSelf)
         {
             PlayerPrefs.SetInt("Character", 1);
         }
-        else if(character3.activeSelf)
+        else if(character[2].activeSelf)
         {
             PlayerPrefs.SetInt("Character", 2);
         }
-        SceneManager.LoadScene("EndlessMode");
+
+        if(gameModeTutorial.activeSelf)
+        {
+            SceneManager.LoadScene("Tutorial");
+        }
+        else if(gameModeEndless.activeSelf)
+        {
+            SceneManager.LoadScene("EndlessMode");
+        }
     }
 
     public void ExitGame()
