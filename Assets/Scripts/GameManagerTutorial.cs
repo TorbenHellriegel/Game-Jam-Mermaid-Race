@@ -6,6 +6,8 @@ using TMPro;
 
 public class GameManagerTutorial : MonoBehaviour
 {
+    public GameObject[] characters;
+
     public GameObject leftButton;
     public GameObject rightButton;
     public GameObject downButton;
@@ -20,9 +22,15 @@ public class GameManagerTutorial : MonoBehaviour
         "Tap the bottom of the screen to dive under obstacles.",
         "Some obstacles you can't dive under. Dive ahead of time to jump out of the water over the obstacle.",
         "Some obstacles you can't dive under or jump over. You have to avoid them!",
-        "Thats it for the tutorial. You are now ready to surf on your own!"
+        "That's it for the tutorial. You are now ready to surf on your own!"
     };
 
+    void Start()
+    {
+        // Spawn the selected character
+        int CharacterIndex = PlayerPrefs.GetInt("Character");
+        characters[CharacterIndex].SetActive(true);
+    }
     public void TutorialPrompt(int tutorialPromptNumber)
     {
         Time.timeScale = 0;
