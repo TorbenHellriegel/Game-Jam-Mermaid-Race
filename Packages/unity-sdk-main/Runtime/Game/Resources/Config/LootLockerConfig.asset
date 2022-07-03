@@ -17,7 +17,7 @@ MonoBehaviour:
   adminToken: 
   domainKey: 
   gameID: 0
-  game_version: 1.0.0.3
+  game_version: 1.0.0.4
   deviceID: b3350179-da47-4a62-9bd1-83e18f17510f
   platform: 0
   developmentMode: 0
